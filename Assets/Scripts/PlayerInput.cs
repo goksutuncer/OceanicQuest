@@ -8,6 +8,7 @@ public class PlayerInput : MonoBehaviour
     public float VerticalInput;
     public bool MouseButtonDown;
 
+
     // Update is called once per frame
     void Update()
     {
