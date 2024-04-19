@@ -7,6 +7,7 @@ public class PlayerInput : MonoBehaviour
     public float HorizontalInput;
     public float VerticalInput;
     public bool MouseButtonDown;
+    public bool SpaceKeyDown;
 
 
     // Update is called once per frame
@@ -18,11 +19,21 @@ public class PlayerInput : MonoBehaviour
         }
         HorizontalInput = Input.GetAxisRaw("Horizontal");
         VerticalInput = Input.GetAxisRaw("Vertical");
+        if (!SpaceKeyDown && Time.timeScale != 0)
+        {
+            SpaceKeyDown = Input.GetKeyDown(KeyCode.Space);
+        }
+    }
+
+    public void ClearCache()
+    {
+        OnDisable();
     }
     private void OnDisable()
     {
         MouseButtonDown = false;
         HorizontalInput = 0;
         VerticalInput = 0;
+        SpaceKeyDown = false;
     }
 }
