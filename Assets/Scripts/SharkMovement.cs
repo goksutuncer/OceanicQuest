@@ -2,24 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DiverPlayer : MonoBehaviour
+public class SharkMovement : MonoBehaviour
 {
     private CharacterController _cc;
-    public float MoveSpeed = 5f;
-    private Vector3 _movementVelocity;
-    private PlayerInput _playerInput;
-    private Animator _animator;
+    public float moveSpeed = 5f; // Speed of movement
+    public float rotationSpeed = 5f; // Speed of rotation
+    public float changeDirectionInterval = 3f; // Interval to change direction
+
+    // Random direction for movement
+    private Vector3 randomDirection;
+    private float timer; // Timer for changing direction
     private float screenWidth;
     private float screenHeight;
-
-    private Vector3 impactOnCharacter;
+    private bool wasWithinBoundary = true;
 
     private Health _health;
-    public bool isInvincible;
-
-    //Pick up
+    //Item drop
     public GameObject ItemToDrop;
     public int Coin;
+
 
     // Material animation
     private MaterialPropertyBlock _materialPropertyBlock;
@@ -28,33 +29,88 @@ public class DiverPlayer : MonoBehaviour
     // State Machine
     public enum CharacterState // type
     {
-        Normal, Attacking, Dead, Slide, BeingHit
+        Normal, Attacking, Dead, BeingHit
     }
     public CharacterState currentState; // variable for the type
-
-
-    [SerializeField]
-    private GameObject _laserPrefab;
-    [SerializeField]
-    private float _fireRate = 0.5f;
-    private float _canFire = -1f;
-    [SerializeField]
-    private int _lives = 3;
-    private SpawnManager _spawnManager;
 
     void Awake()
     {
         _cc = GetComponent<CharacterController>();
-        _animator = GetComponent<Animator>();
+        // Initialize random direction at start
+        GenerateRandomDirection();
         screenWidth = CalculateScreenWidth();
         screenHeight = CalculateScreenHeight();
-        
-        _playerInput = GetComponent<PlayerInput>();
-        _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         _skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         _materialPropertyBlock = new MaterialPropertyBlock();
         _skinnedMeshRenderer.GetPropertyBlock(_materialPropertyBlock);
     }
+
+    void FixedUpdate()
+    {
+        switch (currentState)
+        {
+            case CharacterState.Normal:
+
+                CalculateMovementShark();
+                break;
+
+            case CharacterState.Attacking:
+                break;
+
+            case CharacterState.Dead:
+                break;
+            case CharacterState.BeingHit:
+                break;
+
+        }
+
+    }
+    void CalculateMovementShark()
+    {
+        // Move the object
+        transform.Translate(-1 * randomDirection * moveSpeed * Time.deltaTime, Space.World);
+
+        Vector3 clampedPosition = transform.position;
+        clampedPosition.x = Mathf.Clamp(clampedPosition.x, -screenWidth / 2f, screenWidth / 2f);
+        clampedPosition.y = Mathf.Clamp(clampedPosition.y, -screenHeight / 2f, screenHeight / 2f);
+        transform.position = clampedPosition;
+
+        // Rotate the object towards the movement direction
+        Quaternion targetRotation = Quaternion.LookRotation(randomDirection);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        // Update timer
+        timer += Time.deltaTime;
+
+        // Check if it's time to change direction
+        if (timer >= changeDirectionInterval)
+        {
+            GenerateRandomDirection();
+            timer = 0f; // Reset timer
+        }
+        bool isWithinBoundary = (transform.position.x >= -12f && transform.position.x <= 12f);
+        if (!isWithinBoundary && wasWithinBoundary)
+        {
+            // If the object was within the boundary in the previous frame but has now crossed it, reset its position
+            float rand = Random.Range(0f, 1f);
+            float randomY = Random.Range(-4f, 5f);
+            float randomX = rand < 0.5f ? -17f : 14f;
+            transform.position = new Vector3(randomX, randomY, transform.position.z);
+        }
+
+        // Update the flag for the next frame
+        wasWithinBoundary = isWithinBoundary;
+    }
+
+    // Generate a random direction
+    void GenerateRandomDirection()
+    {
+        randomDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+        randomDirection.z = 0;
+        randomDirection.y = 0;
+    }
+
+    // Calculate screen width based on camera FOV and distance
     float CalculateScreenWidth()
     {
         Camera mainCamera = Camera.main;
@@ -66,8 +122,9 @@ public class DiverPlayer : MonoBehaviour
 
         float distanceFromCamera = Mathf.Abs(transform.position.z - mainCamera.transform.position.z);
         return Mathf.Tan(mainCamera.fieldOfView * Mathf.Deg2Rad / 2) * distanceFromCamera * 2 * mainCamera.aspect;
-
     }
+
+    // Calculate screen height based on camera FOV and distance
     float CalculateScreenHeight()
     {
         Camera mainCamera = Camera.main;
@@ -80,77 +137,8 @@ public class DiverPlayer : MonoBehaviour
         float distanceFromCamera = Mathf.Abs(transform.position.z - mainCamera.transform.position.z);
         return Mathf.Tan(mainCamera.fieldOfView * Mathf.Deg2Rad / 2) * distanceFromCamera * 2;
     }
-
-    private void CalculatePlayerMovement()
-    {
-        if (_playerInput.MouseButtonDown)
-        {
-            SwitchStateTo(CharacterState.Attacking);
-            return;
-        }
-        else if (_playerInput.SpaceKeyDown)
-        {
-            SwitchStateTo(CharacterState.Slide);
-            return;
-        }
-        _movementVelocity.Set(_playerInput.HorizontalInput, _playerInput.VerticalInput, 0f);
-        _movementVelocity.Normalize();
-        _animator.SetFloat("Speed", _movementVelocity.magnitude);
-        _movementVelocity *= MoveSpeed * Time.deltaTime;
-        if (_movementVelocity != Vector3.zero)
-        {
-            transform.rotation = Quaternion.LookRotation(-1 * _movementVelocity);
-        }
-
-    }
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        switch (currentState)
-        {
-            case CharacterState.Normal:
-
-                CalculatePlayerMovement();
-                
-                break;
-            case CharacterState.Slide:
-                CalculatePlayerMovement();
-                break;
-            case CharacterState.BeingHit:
-                break;
-        } 
-        _cc.Move(_movementVelocity);
-
-        if (Mathf.Abs(transform.position.x) > screenWidth / 2)
-        {
-            // Wrap player around to the opposite side
-            float wrapOffset = Mathf.Sign(transform.position.x) * screenWidth;
-            transform.position -= new Vector3(wrapOffset, 0, 0);
-        }
-        Vector3 clampedPosition = transform.position;
-        clampedPosition.y = Mathf.Clamp(clampedPosition.y, -screenHeight / 2, screenHeight / 2);
-        transform.position = clampedPosition;
-    }
-    void FireLaser()
-    {
-        _canFire = Time.time + _fireRate;
-        Instantiate(_laserPrefab, transform.position + new UnityEngine.Vector3(0, 1.05f, 0), UnityEngine.Quaternion.identity);
-        /*if (_isTripleShotActive == true)
-        {
-            Instantiate(_tripleshotPrefab, transform.position, UnityEngine.Quaternion.identity);
-        }
-        else
-        {
-            Instantiate(_laserPrefab, transform.position + new UnityEngine.Vector3(0, 1.05f, 0), UnityEngine.Quaternion.identity);
-        }
-        _audioSource.Play(); */
-    }
-
     public void SwitchStateTo(CharacterState newState)
     {
-        // clear cache
-        _playerInput.ClearCache();
-
         //exiting a state
         switch (currentState)
         {
@@ -159,8 +147,6 @@ public class DiverPlayer : MonoBehaviour
             case CharacterState.Attacking:
                 break;
             case CharacterState.Dead:
-                break;
-            case CharacterState.Slide:
                 break;
             case CharacterState.BeingHit:
                 break;
@@ -180,33 +166,20 @@ public class DiverPlayer : MonoBehaviour
                 _cc.enabled = false;
                 StartCoroutine(MaterialDissolve());
                 break;
-            case CharacterState.Slide:
-                StartCoroutine(DashSpeed());
-                break;
             case CharacterState.BeingHit:
                 break;
         }
         currentState = newState;
 
     }
-    IEnumerator DashSpeed()
-    {
-        MoveSpeed = 15f;
-        yield return new WaitForSeconds(0.5f);
-        MoveSpeed = 3.5f;
-        SwitchStateTo(CharacterState.Normal);
-    }
     public void ApplyDamage(int damage, Vector3 attackerPos = new Vector3())
     {
-        if (isInvincible)
-        {
-            return;
-        }
         if (_health != null)
         {
             _health.ApplyDamage(damage);
+            Debug.Log("Health??");
         }
-        
+
         StartCoroutine(MaterialBlink());
         SwitchStateTo(CharacterState.BeingHit);
         AddImpact(attackerPos, 10f);
@@ -217,7 +190,6 @@ public class DiverPlayer : MonoBehaviour
         Vector3 impactDirection = transform.position - attackerPos;
         impactDirection.Normalize();
         impactDirection.y = 0;
-        impactOnCharacter = impactDirection * force;
     }
     IEnumerator MaterialBlink()
     {
@@ -250,34 +222,13 @@ public class DiverPlayer : MonoBehaviour
             _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBlock);
             yield return null;
         }
+        DropItem();
     }
-
-    public void PickUpItem(PickUp item)
+    public void DropItem()
     {
-        switch (item.Type)
+        if (ItemToDrop != null)
         {
-            case PickUp.PickUpType.Heal:
-                AddHealth(item.Value);
-                break;
-            case PickUp.PickUpType.Coin:
-                AddCoin(item.Value);
-                break;
-        }
-    }
-    private void AddHealth(int health)
-    {
-        _health.AddHealth(health);
-        //GetComponent<PlayerVFXManager>().PlayHealVFX();
-    }
-    private void AddCoin(int coin)
-    {
-        Coin += coin;
-    }
-    public void RotateToTarget()
-    {
-        if (currentState != CharacterState.Dead)
-        {
-            //transform.LookAt(TargetPlayer, Vector3.up);
+            Instantiate(ItemToDrop, transform.position, Quaternion.identity);
         }
     }
 }
