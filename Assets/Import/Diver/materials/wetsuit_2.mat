@@ -124,7 +124,7 @@ Material:
     - DissolveScale: 100
     - Dissolve_Width: 1
     - Fresnel: 10
-    - Metallic: 1
+    - Metallic: 0
     - Smoothness: 1
     - Use_Fresnel: 0
     - _BUILTIN_QueueControl: 0
