@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,25 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    private DiverPlayer _diverPlayer;
     private bool _isGameOver;
+
+    private void Awake()
+    {
+        _diverPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<DiverPlayer>();
+
+        _diverPlayer.OnPlayerDied += OnPlayerDied;
+    }
+
+    private void OnDestroy()
+    {
+        _diverPlayer.OnPlayerDied -= OnPlayerDied;
+    }
+
+    private void OnPlayerDied()
+    {
+        GameOver();
+    }
 
     private void Update()
     {

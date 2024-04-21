@@ -2024,7 +2024,6 @@ GameObject:
   - component: {fileID: 5492980838887285245}
   - component: {fileID: 1612357319}
   - component: {fileID: 1971997235}
-  - component: {fileID: 5745865075941454396}
   m_Layer: 4
   m_Name: Model_73A_-_Great_Hammerhead_Shark
   m_TagString: Enemy
@@ -2105,20 +2104,6 @@ MonoBehaviour:
   ItemToDrop: {fileID: 0}
   Coin: 0
   currentState: 0
---- !u!114 &5745865075941454396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9086276357762493313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09faa1cf712e846d8b0c5989378a91f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHealth: 100
-  CurrentHealth: 0
 --- !u!1 &9177135628544543077
 GameObject:
   m_ObjectHideFlags: 0

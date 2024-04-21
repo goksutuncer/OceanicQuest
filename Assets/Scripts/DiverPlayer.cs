@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,8 @@ public class DiverPlayer : MonoBehaviour
     private MaterialPropertyBlock _materialPropertyBlock;
     private SkinnedMeshRenderer _skinnedMeshRenderer;
 
+    public Action OnPlayerDied { get; set; }
+
     // State Machine
     public enum CharacterState // type
     {
@@ -48,6 +51,7 @@ public class DiverPlayer : MonoBehaviour
         _animator = GetComponent<Animator>();
         screenWidth = CalculateScreenWidth();
         screenHeight = CalculateScreenHeight();
+        _health = GetComponent<Health>();
         
         _playerInput = GetComponent<PlayerInput>();
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
@@ -179,6 +183,7 @@ public class DiverPlayer : MonoBehaviour
             case CharacterState.Dead:
                 _cc.enabled = false;
                 StartCoroutine(MaterialDissolve());
+                OnPlayerDied?.Invoke();
                 break;
             case CharacterState.Slide:
                 StartCoroutine(DashSpeed());
@@ -198,13 +203,14 @@ public class DiverPlayer : MonoBehaviour
     }
     public void ApplyDamage(int damage, Vector3 attackerPos = new Vector3())
     {
-        if (isInvincible)
+        /*if (isInvincible)
         {
             return;
-        }
+        }*/
         if (_health != null)
         {
             _health.ApplyDamage(damage);
+            Debug.Log("Health");
         }
         
         StartCoroutine(MaterialBlink());

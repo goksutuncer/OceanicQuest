@@ -2,29 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
+using UnityEngine.UIElements;
 
 public class DamageCaster : MonoBehaviour
 {
     private Collider _damageCasterCollider;
     public int Damage = 30;
     public string TargetTag;
-    private List<Collider> _damagedTargetList;
 
     public void Awake()
     {
         _damageCasterCollider = GetComponent<Collider>();
-        _damageCasterCollider.enabled = false;
-        _damagedTargetList = new List<Collider>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == TargetTag && !_damagedTargetList.Contains(other))
+        if (other.tag == TargetTag)
         {
-            DiverPlayer targetCC = other.GetComponent<DiverPlayer>();
-            if (targetCC != null)
+            DiverPlayer targetPlayer = other.GetComponent<DiverPlayer>();
+            if (targetPlayer != null)
             {
-                targetCC.ApplyDamage(Damage, transform.parent.position);
+                targetPlayer.ApplyDamage(Damage, transform.parent.position);
                 /*PlayerVFXManager playerVFXManager = transform.parent.GetComponent<PlayerVFXManager>();
                 if (playerVFXManager != null)
                 {
@@ -37,17 +35,7 @@ public class DamageCaster : MonoBehaviour
                     }
                 }*/
             }
-            _damagedTargetList.Add(other);
         }
     }
-    public void EnableDamageCaster()
-    {
-        _damagedTargetList.Clear();
-        _damageCasterCollider.enabled = true;
-    }
-    public void DisableDamageCaster()
-    {
-        _damagedTargetList.Clear();
-        _damageCasterCollider.enabled = false;
-    }
+    
 }
