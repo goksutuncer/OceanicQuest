@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
     public int MaxHealth;
     public int CurrentHealth;
     private DiverPlayer _diver;
+    public float CurrentHealthPercentage { get { return (float) CurrentHealth / (float) MaxHealth; } }
 
     private void Awake()
     {

@@ -3,43 +3,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.TextCore.Text;
 
 public class GameManager : MonoBehaviour
 {
-    private DiverPlayer _diverPlayer;
-    private bool _isGameOver;
+    public GameUIManager gameUI_Manager;
+    public DiverPlayer playerCharacter;
+    private bool gameIsOver;
 
     private void Awake()
     {
-        _diverPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<DiverPlayer>();
-
-        _diverPlayer.OnPlayerDied += OnPlayerDied;
+        playerCharacter = GameObject.FindGameObjectWithTag("Player").GetComponent<DiverPlayer>();
     }
 
-    private void OnDestroy()
+    private void GameOver()
     {
-        _diverPlayer.OnPlayerDied -= OnPlayerDied;
+        gameUI_Manager.ShowGameOverUI();
     }
-
-    private void OnPlayerDied()
+    private void GameFinished()
     {
-        GameOver();
+        gameUI_Manager.ShowGameOverUI();
     }
-
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && _isGameOver == true)
+        if (gameIsOver)
         {
-            RestartLevel();
+            return;
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            QuitGame();
+            gameUI_Manager.TogglePauseUI();
         }
-    }
-    public void GameOver()
-    {
-        _isGameOver = true;
+        if (playerCharacter.currentState == DiverPlayer.CharacterState.Dead)
+        {
+            gameIsOver = true;
+            GameOver();
+        }
     }
     void RestartLevel()
     {
@@ -48,5 +47,15 @@ public class GameManager : MonoBehaviour
     void QuitGame()
     {
         Application.Quit();
+    }
+    public void ReturnToTheMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
