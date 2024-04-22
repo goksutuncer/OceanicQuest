@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerBeingHitState : StateBase
 {
+    [SerializeField] private DiverPlayer _player;
     [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer = null;
 
     private MaterialPropertyBlock _materialPropertyBlock = null;
-
+    
     public override void EnterActions()
     {
         _materialPropertyBlock = new MaterialPropertyBlock();
@@ -16,11 +17,12 @@ public class PlayerBeingHitState : StateBase
         //AddImpact();
 
         StartCoroutine(MaterialBlink());
+
     }
 
     public override void ExitActions()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     private void AddImpact(Vector3 attackerPos, float force)
@@ -40,5 +42,6 @@ public class PlayerBeingHitState : StateBase
 
         _materialPropertyBlock.SetFloat("_blink", 0f);
         _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBlock);
+        _player.PlayerStateController.ChangeState(EDiverPlayerState.Swim);
     }
 }

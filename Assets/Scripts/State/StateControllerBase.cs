@@ -22,6 +22,11 @@ public abstract class StateControllerBase<TState> : MonoBehaviour
 
     public void ChangeState(TState state)
     {
+        if (CurrentState.Equals(state))
+        {
+            return;
+        }
+
         StateMap curState = _stateMap.FirstOrDefault(i => i.StateType.Equals(CurrentState));
 
         if (curState != null)
@@ -32,6 +37,8 @@ public abstract class StateControllerBase<TState> : MonoBehaviour
         StateMap nextState = _stateMap.FirstOrDefault(i => i.StateType.Equals(state));
 
         nextState.State.EnterActions();
+
+        CurrentState = nextState.StateType;
     }
 
     private void Awake()

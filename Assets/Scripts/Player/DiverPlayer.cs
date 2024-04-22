@@ -33,7 +33,6 @@ public class DiverPlayer : MonoBehaviour
         if (_playerInput.MouseButtonDown)
         {
             _playerStateController.ChangeState(EDiverPlayerState.Attack);
-            return;
         }
         else if (_playerInput.MouseButtonUp)
         {
@@ -42,8 +41,8 @@ public class DiverPlayer : MonoBehaviour
         else if (_playerInput.SpaceKeyDown)
         {
             _playerStateController.ChangeState(EDiverPlayerState.Dash);
-            return;
         }
+        _playerInput.ClearCache();
     }
 
     public void ApplyDamage(int damage, Vector3 attackerPos = new Vector3())

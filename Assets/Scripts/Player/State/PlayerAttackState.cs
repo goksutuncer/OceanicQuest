@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAttackState : StateBase
 {
+    [SerializeField] private GameObject _weapon;
     public override void EnterActions()
     {
         AimAndFire();
@@ -27,7 +28,8 @@ public class PlayerAttackState : StateBase
 
     void Fire()
     {
-        // Instantiate a bullet at the firePoint
-        //Instantiate(_weapon, transform.position + new Vector3(1f, 0.5f, 0), Quaternion.identity);
+
+        Instantiate(_weapon, transform.position + new Vector3(1f, 0.5f, 0), Quaternion.identity);
+        
     }
 }
