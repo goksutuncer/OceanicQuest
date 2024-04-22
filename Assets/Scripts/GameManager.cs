@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         {
             gameUI_Manager.TogglePauseUI();
         }
-        if (playerCharacter.currentState == DiverPlayer.CharacterState.Dead)
+        if (playerCharacter.PlayerStateController.CurrentState == EDiverPlayerState.Dead)
         {
             gameIsOver = true;
             GameOver();

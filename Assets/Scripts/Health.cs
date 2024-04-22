@@ -29,7 +29,7 @@ public class Health : MonoBehaviour
     {
         if (CurrentHealth <= 0)
         {
-            _diver.SwitchStateTo(DiverPlayer.CharacterState.Dead);
+            _diver.PlayerStateController.ChangeState(EDiverPlayerState.Dead);
         }
     }
     public void AddHealth(int health)

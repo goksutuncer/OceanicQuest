@@ -7,6 +7,7 @@ public class PlayerInput : MonoBehaviour
     public float HorizontalInput;
     public float VerticalInput;
     public bool MouseButtonDown;
+    public bool MouseButtonUp;
     public bool SpaceKeyDown;
 
 
@@ -17,6 +18,7 @@ public class PlayerInput : MonoBehaviour
         {
             MouseButtonDown = Input.GetMouseButtonDown(0);
         }
+        MouseButtonUp = Input.GetMouseButtonUp(0);
         HorizontalInput = Input.GetAxisRaw("Horizontal");
         VerticalInput = Input.GetAxisRaw("Vertical");
         if (!SpaceKeyDown && Time.timeScale != 0)
