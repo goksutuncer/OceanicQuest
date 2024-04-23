@@ -22,15 +22,7 @@ public class Health : MonoBehaviour
         CurrentHealth -= damage;
         Debug.Log(gameObject.name + "took damage:" + damage);
         Debug.Log(gameObject.name + "current health: " + CurrentHealth);
-        CheckHealth();
-    }
 
-    private void CheckHealth()
-    {
-        if (CurrentHealth <= 0)
-        {
-            _diver.PlayerStateController.ChangeState(EDiverPlayerState.Dead);
-        }
     }
     public void AddHealth(int health)
     {
