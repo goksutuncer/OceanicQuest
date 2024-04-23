@@ -8,7 +8,6 @@ using UnityEngine.TextCore.Text;
 public class GameManager : MonoBehaviour
 {
     public GameUIManager gameUI_Manager;
-    public DiverPlayer playerCharacter;
     private bool gameIsOver;
 
     // Static reference to the instance

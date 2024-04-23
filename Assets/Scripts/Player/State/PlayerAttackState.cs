@@ -1,35 +1,74 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttackState : StateBase
 {
     [SerializeField] private GameObject _weapon;
+
+    [SerializeField] private DiverPlayer _player = null;
+
+    [SerializeField] private Transform _weaponCarrier = null;
+
+    GameObject _weaponInstance;
+
     public override void EnterActions()
     {
-        AimAndFire();
+        StartCoroutine(AimRoutine());
     }
 
     public override void ExitActions()
     {
+        Destroy(_weaponInstance);
     }
 
-    void AimAndFire()
+    IEnumerator AimRoutine()
     {
-        // Aim the weapon towards the mouse position
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 direction = (mousePosition - transform.position).normalized;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        CreateWeapon();
 
-        // Fire the weapon
-        Fire();
+        while (true)
+        {
+            Aim();
+
+            if (_player.PlayerInput.MouseButtonUp)
+            {
+                Fire();
+
+                _player.PlayerStateController.ChangeState(EDiverPlayerState.Swim);
+
+                yield break;
+            }
+
+            yield return null;
+        }
+    }
+
+    void CreateWeapon()
+    {
+        _weaponInstance = Instantiate(
+            _weapon,
+            _weaponCarrier);
+    }
+
+    void Aim()
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition.z = Camera.main.nearClipPlane;
+
+        Vector3 viewportPoint = Camera.main.ScreenToViewportPoint(mousePosition);
+        float target = (viewportPoint.y - 0.5f) * 2;
+
+        Vector3 currentRotation = _weaponCarrier.localRotation.eulerAngles;
+
+        currentRotation.x = target * -90;
+
+        _weaponCarrier.localRotation = Quaternion.Euler(currentRotation);
+
     }
 
     void Fire()
     {
 
-        GameObject weaponInstance = Instantiate(_weapon, transform.position + new Vector3(1f, 0.5f, 0), Quaternion.identity);
-        weaponInstance.transform.Translate(Vector3.forward);
+
+
     }
 }

@@ -35,10 +35,6 @@ public class DiverPlayer : MonoBehaviour
         {
             _playerStateController.ChangeState(EDiverPlayerState.Attack);
         }
-        else if (_playerInput.MouseButtonUp)
-        {
-            _playerStateController.ChangeState(EDiverPlayerState.Swim);
-        }
         else if (_playerInput.SpaceKeyDown)
         {
             _playerStateController.ChangeState(EDiverPlayerState.Dash);

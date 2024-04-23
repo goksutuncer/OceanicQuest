@@ -775,7 +775,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameUI_Manager: {fileID: 2767669644580118172}
-  playerCharacter: {fileID: 0}
 --- !u!1 &928717138
 GameObject:
   m_ObjectHideFlags: 0
