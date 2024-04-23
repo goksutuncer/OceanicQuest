@@ -14,6 +14,7 @@ public class DiverPlayer : MonoBehaviour
     [SerializeField] private CharacterController _cc;
     public CharacterController CharacterController => _cc;
 
+
     [SerializeField] private Health _health;
     public Health Health => _health;
     public bool isInvincible;

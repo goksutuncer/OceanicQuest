@@ -3,34 +3,42 @@ using UnityEngine;
 
 public class PlayerAttackState : StateBase
 {
-    [SerializeField] private GameObject _weapon;
-
+    [SerializeField] private GameObject _weaponPrefab;
     [SerializeField] private DiverPlayer _player = null;
 
     [SerializeField] private Transform _weaponCarrier = null;
-
     GameObject _weaponInstance;
+    private bool isFired;
+    private bool isInState;
 
     public override void EnterActions()
     {
+        isInState = true;
+        isFired = false;
         StartCoroutine(AimRoutine());
     }
 
     public override void ExitActions()
     {
+        isInState = false;
+        if(!isFired)
+        {
+            Destroy(_weaponInstance);
+        }
     }
 
     IEnumerator AimRoutine()
     {
         CreateWeapon();
 
-        while (true)
+        while (isInState)
         {
             Aim();
 
             if (_player.PlayerInput.MouseButtonUp)
             {
-                StartCoroutine(FireRoutine());
+                _weaponInstance.GetComponent<Weapon>().Fire();
+                isFired = true;
 
                 _player.PlayerStateController.ChangeState(EDiverPlayerState.Swim);
 
@@ -44,7 +52,7 @@ public class PlayerAttackState : StateBase
     void CreateWeapon()
     {
         _weaponInstance = Instantiate(
-            _weapon,
+            _weaponPrefab,
             _weaponCarrier);
     }
 
@@ -61,24 +69,6 @@ public class PlayerAttackState : StateBase
         currentRotation.x = target * -90;
 
         _weaponCarrier.localRotation = Quaternion.Euler(currentRotation);
-
     }
 
-    IEnumerator FireRoutine()
-    {
-        _weaponInstance.transform.parent = null;
-
-        float timePassed = 0;
-
-        while (timePassed < 5)
-        {
-            timePassed += Time.deltaTime;
-
-            _weaponInstance.transform.Translate(Vector3.forward * 0.1f);
-
-            yield return null;
-        }
-
-        Destroy(_weaponInstance);
-    }
 }

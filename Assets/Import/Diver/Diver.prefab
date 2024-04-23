@@ -687,7 +687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 938b2add9937b469cb32ab4ec7a4f5d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weapon: {fileID: 926395257075785752, guid: c6b2b67e9001c4db8b5bd5fd42db34ea, type: 3}
+  _weaponPrefab: {fileID: 926395257075785752, guid: c6b2b67e9001c4db8b5bd5fd42db34ea, type: 3}
   _player: {fileID: 691902086}
   _weaponCarrier: {fileID: 5364270723222437009}
 --- !u!1 &1484783753895067357
@@ -1216,7 +1216,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 691902086}
   _skinnedMeshRenderer:
-  - {fileID: 0}
+  - {fileID: 8345287248501520166}
+  - {fileID: 3083753901972922048}
+  - {fileID: 2951696915058524017}
+  - {fileID: 8487013844369624156}
+  - {fileID: 2915206018603873806}
 --- !u!1 &2066820870365011467
 GameObject:
   m_ObjectHideFlags: 0
@@ -1919,7 +1923,7 @@ MonoBehaviour:
   _playerStateController: {fileID: 2859467016786820185}
   _playerInput: {fileID: 691902089}
   _cc: {fileID: 691902088}
-  _health: {fileID: 0}
+  _health: {fileID: 308788275}
   isInvincible: 0
   ItemToDrop: {fileID: 0}
   Coin: 0
@@ -3463,7 +3467,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 691902086}
   _skinnedMeshRenderer:
-  - {fileID: 0}
+  - {fileID: 8345287248501520166}
+  - {fileID: 3083753901972922048}
+  - {fileID: 2951696915058524017}
+  - {fileID: 8487013844369624156}
+  - {fileID: 2915206018603873806}
 --- !u!1 &6106641921637943152
 GameObject:
   m_ObjectHideFlags: 0

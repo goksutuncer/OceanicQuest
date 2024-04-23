@@ -8,21 +8,14 @@ public class SpawnManager : MonoBehaviour
     private GameObject[] _enemyPrefabs;
     [SerializeField]
     private GameObject _enemyContainer;
-    private DiverPlayer _diverPlayer;
     private bool _stopSpawning = false;
 
-    private GameManager _gameManager;
     //private GameObject[] _powerups;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        _gameManager = FindObjectOfType<GameManager>();
-        if (_gameManager != null)
-        {
-            _diverPlayer = GameObject.Find("Diver").GetComponent<DiverPlayer>();
-        }
         StartCoroutine(SpawnEnemyRoutine());
     }
 
@@ -72,8 +65,5 @@ public class SpawnManager : MonoBehaviour
 
     }*/
 
-    public void OnPlayerDeath()
-    {
-        _stopSpawning = true;
-    }
+
 }
