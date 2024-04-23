@@ -47,22 +47,7 @@ public class SharkMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        switch (currentState)
-        {
-            case CharacterState.Normal:
-
-                CalculateMovementShark();
-                break;
-
-            case CharacterState.Attacking:
-                break;
-
-            case CharacterState.Dead:
-                break;
-            case CharacterState.BeingHit:
-                break;
-
-        }
+        CalculateMovementShark();
 
     }
     void CalculateMovementShark()
@@ -137,41 +122,7 @@ public class SharkMovement : MonoBehaviour
         float distanceFromCamera = Mathf.Abs(transform.position.z - mainCamera.transform.position.z);
         return Mathf.Tan(mainCamera.fieldOfView * Mathf.Deg2Rad / 2) * distanceFromCamera * 2;
     }
-    public void SwitchStateTo(CharacterState newState)
-    {
-        //exiting a state
-        switch (currentState)
-        {
-            case CharacterState.Normal:
-                break;
-            case CharacterState.Attacking:
-                break;
-            case CharacterState.Dead:
-                break;
-            case CharacterState.BeingHit:
-                break;
-        }
-        //entering a state 
-        switch (newState)
-        {
-            case CharacterState.Normal:
-                break;
-            case CharacterState.Attacking:
-
-                //_animator.SetTrigger("Attack");
-                //attackStartTime = Time.time; //current game time
-
-                break;
-            case CharacterState.Dead:
-                _cc.enabled = false;
-                StartCoroutine(MaterialDissolve());
-                break;
-            case CharacterState.BeingHit:
-                break;
-        }
-        currentState = newState;
-
-    }
+    
     public void ApplyDamage(int damage, Vector3 attackerPos = new Vector3())
     {
         if (_health != null)
@@ -179,49 +130,15 @@ public class SharkMovement : MonoBehaviour
             _health.ApplyDamage(damage);
             Debug.Log("Health??");
         }
-
-        StartCoroutine(MaterialBlink());
-        SwitchStateTo(CharacterState.BeingHit);
-        AddImpact(attackerPos, 10f);
-
-    }
-    private void AddImpact(Vector3 attackerPos, float force)
-    {
-        Vector3 impactDirection = transform.position - attackerPos;
-        impactDirection.Normalize();
-        impactDirection.y = 0;
-    }
-    IEnumerator MaterialBlink()
-    {
-        _materialPropertyBlock.SetFloat("_blink", 0.4f);
-        _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBlock);
-
-        yield return new WaitForSeconds(0.2f);
-
-        _materialPropertyBlock.SetFloat("_blink", 0f);
-        _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBlock);
     }
 
     IEnumerator MaterialDissolve()
     {
         yield return new WaitForSeconds(2);
-        float dissolveTimeDuration = 2f;
-        float currentDissolveTime = 0;
-        float dissolveHeight_start = 20f;
-        float dissolveHeight_target = -10f;
-        float dissolveHeight;
 
         _materialPropertyBlock.SetFloat("_enableDissolve", 1f);
         _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBlock);
 
-        while (currentDissolveTime < dissolveTimeDuration)
-        {
-            currentDissolveTime += Time.deltaTime;
-            dissolveHeight = Mathf.Lerp(dissolveHeight_start, dissolveHeight_target, currentDissolveTime / dissolveTimeDuration);
-            _materialPropertyBlock.SetFloat("_dissolve_height", dissolveHeight);
-            _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBlock);
-            yield return null;
-        }
         DropItem();
     }
     public void DropItem()

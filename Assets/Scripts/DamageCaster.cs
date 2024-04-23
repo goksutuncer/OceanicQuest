@@ -8,7 +8,7 @@ public class DamageCaster : MonoBehaviour
 {
     private Collider _damageCasterCollider;
     public int Damage = 30;
-    public string TargetTag;
+    public string Player;
 
     public void Awake()
     {
@@ -17,7 +17,7 @@ public class DamageCaster : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == TargetTag)
+        if (other.tag == Player)
         {
             DiverPlayer targetPlayer = other.GetComponent<DiverPlayer>();
             if (targetPlayer != null)

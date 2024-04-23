@@ -29,7 +29,7 @@ public class PlayerAttackState : StateBase
     void Fire()
     {
 
-        Instantiate(_weapon, transform.position + new Vector3(1f, 0.5f, 0), Quaternion.identity);
-        
+        GameObject weaponInstance = Instantiate(_weapon, transform.position + new Vector3(1f, 0.5f, 0), Quaternion.identity);
+        weaponInstance.transform.Translate(Vector3.forward);
     }
 }
