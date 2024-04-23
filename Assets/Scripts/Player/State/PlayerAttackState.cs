@@ -18,7 +18,6 @@ public class PlayerAttackState : StateBase
 
     public override void ExitActions()
     {
-        Destroy(_weaponInstance);
     }
 
     IEnumerator AimRoutine()
@@ -31,7 +30,7 @@ public class PlayerAttackState : StateBase
 
             if (_player.PlayerInput.MouseButtonUp)
             {
-                Fire();
+                StartCoroutine(FireRoutine());
 
                 _player.PlayerStateController.ChangeState(EDiverPlayerState.Swim);
 
@@ -65,10 +64,21 @@ public class PlayerAttackState : StateBase
 
     }
 
-    void Fire()
+    IEnumerator FireRoutine()
     {
+        _weaponInstance.transform.parent = null;
 
+        float timePassed = 0;
 
+        while (timePassed < 5)
+        {
+            timePassed += Time.deltaTime;
 
+            _weaponInstance.transform.Translate(Vector3.forward * 0.1f);
+
+            yield return null;
+        }
+
+        Destroy(_weaponInstance);
     }
 }
