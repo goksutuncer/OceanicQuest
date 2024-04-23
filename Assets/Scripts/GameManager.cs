@@ -33,11 +33,12 @@ public class GameManager : MonoBehaviour
             return instance;
         }
     }
-
+    public Action OnGameOver { get; set; }
     public void GameOver()
     {
         gameIsOver = true;
         gameUI_Manager.ShowGameOverUI();
+        OnGameOver?.Invoke();
     }
 
     public void GameFinished()

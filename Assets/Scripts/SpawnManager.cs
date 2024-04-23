@@ -17,6 +17,16 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnEnemyRoutine());
+        GameManager.Instance.OnGameOver += OnGameOver;
+    }
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnGameOver -= OnGameOver;
+    }
+
+    private void OnGameOver()
+    {
+        _stopSpawning = true;
     }
 
     public void StartSpawning()
