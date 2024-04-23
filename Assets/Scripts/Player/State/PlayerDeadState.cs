@@ -19,7 +19,6 @@ public class PlayerDeadState : StateBase
 
     IEnumerator MaterialDissolve()
     {
-        yield return new WaitForSeconds(2);
         float dissolveTimeDuration = 2f;
         float currentDissolveTime = 0;
         float dissolveHeight_start = 20f;
@@ -34,16 +33,18 @@ public class PlayerDeadState : StateBase
             item.SetPropertyBlock(materialPropertyBlock);
         }
 
-        foreach (var item in _skinnedMeshRenderer)
-            while (currentDissolveTime < dissolveTimeDuration)
+        while (currentDissolveTime < dissolveTimeDuration)
+        {
+            currentDissolveTime += Time.deltaTime;
+            foreach (var item in _skinnedMeshRenderer)
             {
-                currentDissolveTime += Time.deltaTime;
                 dissolveHeight = Mathf.Lerp(dissolveHeight_start, dissolveHeight_target, currentDissolveTime / dissolveTimeDuration);
                 MaterialPropertyBlock materialPropertyBlock = new MaterialPropertyBlock();
                 materialPropertyBlock.SetFloat("_dissolve_height", dissolveHeight);
                 item.SetPropertyBlock(materialPropertyBlock);
-                yield return null;
             }
+            yield return null;
+        }
 
     }
 }

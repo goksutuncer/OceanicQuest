@@ -144,7 +144,7 @@ public class Shark : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
-        _materialPropertyBlock.SetFloat("_enableDissolve", 1f);
+        _materialPropertyBlock.SetFloat("_DissolveAmount", 1f);
         _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBlock);
 
         DropItem();
