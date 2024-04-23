@@ -5,6 +5,7 @@ using System.Linq;
 public abstract class StateControllerBase<TState> : MonoBehaviour
 {
     [SerializeField] private StateMap[] _stateMap = null;
+    [SerializeField] private StateTransitionMap[] _stateTransitionMap = null;
 
     [SerializeField] private TState _initialState;
 
@@ -20,9 +21,22 @@ public abstract class StateControllerBase<TState> : MonoBehaviour
         public StateBase State => _state;
     }
 
+    [Serializable]
+    public class StateTransitionMap
+    {
+        [field: SerializeField] public TState StateFromType { get; private set; }
+
+        [field: SerializeField] public TState StateToType { get; private set; }
+    }
+
     public void ChangeState(TState state)
     {
         if (CurrentState.Equals(state))
+        {
+            return;
+        }
+
+        if(!CanTransition(CurrentState, state))
         {
             return;
         }
@@ -39,6 +53,15 @@ public abstract class StateControllerBase<TState> : MonoBehaviour
         nextState.State.EnterActions();
 
         CurrentState = nextState.StateType;
+    }
+
+    private bool CanTransition(TState stateFrom, TState stateTo)
+    {
+        StateTransitionMap transition = _stateTransitionMap.FirstOrDefault(i =>
+            i.StateFromType.Equals(stateFrom) &&
+            i.StateToType.Equals(stateTo));
+
+        return transition != null;
     }
 
     private void Awake()

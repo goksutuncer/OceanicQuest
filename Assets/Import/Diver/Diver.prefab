@@ -4676,6 +4676,25 @@ MonoBehaviour:
     _state: {fileID: 6125914638370350626}
   - _stateType: 4
     _state: {fileID: 796909001629555792}
+  _stateTransitionMap:
+  - <StateFromType>k__BackingField: 0
+    <StateToType>k__BackingField: 1
+  - <StateFromType>k__BackingField: 1
+    <StateToType>k__BackingField: 2
+  - <StateFromType>k__BackingField: 1
+    <StateToType>k__BackingField: 3
+  - <StateFromType>k__BackingField: 1
+    <StateToType>k__BackingField: 4
+  - <StateFromType>k__BackingField: 2
+    <StateToType>k__BackingField: 1
+  - <StateFromType>k__BackingField: 2
+    <StateToType>k__BackingField: 3
+  - <StateFromType>k__BackingField: 3
+    <StateToType>k__BackingField: 5
+  - <StateFromType>k__BackingField: 3
+    <StateToType>k__BackingField: 1
+  - <StateFromType>k__BackingField: 4
+    <StateToType>k__BackingField: 1
   _initialState: 1
 --- !u!1 &8705446736026353929
 GameObject:
