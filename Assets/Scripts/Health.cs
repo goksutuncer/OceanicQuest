@@ -8,20 +8,16 @@ public class Health : MonoBehaviour
 
     public int MaxHealth;
     public int CurrentHealth;
-    private DiverPlayer _diver;
     public float CurrentHealthPercentage { get { return (float) CurrentHealth / (float) MaxHealth; } }
 
     private void Awake()
     {
         CurrentHealth = MaxHealth;
-        _diver = GetComponent<DiverPlayer>();
     }
 
     public void ApplyDamage(int damage)
     {
         CurrentHealth -= damage;
-        Debug.Log(gameObject.name + "took damage:" + damage);
-        Debug.Log(gameObject.name + "current health: " + CurrentHealth);
 
     }
     public void AddHealth(int health)

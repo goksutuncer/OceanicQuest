@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    private Shark shark;
 
     public void Fire()
     {
@@ -25,5 +26,20 @@ public class Weapon : MonoBehaviour
             yield return null;
         }
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Enemy")
+        {
+            Debug.Log("SHark get HIT");
+            Shark shark = other.transform.GetComponent<Shark>();
+
+            if (shark != null)
+            {
+                shark.ApplyDamage(30);
+            }
+            Destroy(gameObject);
+        }
     }
 }

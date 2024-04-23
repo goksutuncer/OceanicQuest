@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerDashState : StateBase
 {
+    [SerializeField] private DiverPlayer _player = null;
     public override void EnterActions()
     {
         StartCoroutine(DashSpeed());
@@ -15,6 +16,7 @@ public class PlayerDashState : StateBase
 
     IEnumerator DashSpeed()
     {
+
         //_moveSpeed = 15f;
         //yield return new WaitForSeconds(0.5f);
         //_moveSpeed = 3.5f;

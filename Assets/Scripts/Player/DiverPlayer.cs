@@ -52,7 +52,6 @@ public class DiverPlayer : MonoBehaviour
         if (_health != null)
         {
             _health.ApplyDamage(damage);
-            Debug.Log("Health");
         }
         
         _playerStateController.ChangeState(EDiverPlayerState.BeingHit);

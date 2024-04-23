@@ -540,7 +540,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3778564112437316801}
   m_LocalRotation: {x: 0, y: 0, z: -0, w: -1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1966,6 +1966,7 @@ GameObject:
   - component: {fileID: 1971997235}
   - component: {fileID: 8206653601105794308}
   - component: {fileID: 6961148116598002994}
+  - component: {fileID: 764947304302541344}
   m_Layer: 4
   m_Name: Model_73A_-_Great_Hammerhead_Shark
   m_TagString: Enemy
@@ -2039,12 +2040,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6101817550af045a19b39eff2d2761f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _skinnedMeshRenderer:
+  - {fileID: 805567482684351468}
+  - {fileID: 3227334144642466381}
+  - {fileID: 6849975645129305342}
   moveSpeed: 5
   rotationSpeed: 5
   changeDirectionInterval: 3
   ItemToDrop: {fileID: 0}
   Coin: 0
-  currentState: 0
 --- !u!54 &8206653601105794308
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2072,8 +2076,22 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.36, y: 1.09, z: 2.98}
-  m_Center: {x: 0, y: -0.36, z: 0.13}
+  m_Size: {x: 1.36, y: 1.71, z: 3.52}
+  m_Center: {x: 0, y: -0.36, z: 0.42}
+--- !u!114 &764947304302541344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9086276357762493313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98a753dd6d96b406d906db83602aba62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 100
+  CurrentHealth: 0
 --- !u!1 &9177135628544543077
 GameObject:
   m_ObjectHideFlags: 0

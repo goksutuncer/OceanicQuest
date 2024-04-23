@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Shark : MonoBehaviour
 {
+    [SerializeField] private SkinnedMeshRenderer[] _skinnedMeshRenderer = null;
     private CharacterController _cc;
     public float moveSpeed = 5f; // Speed of movement
     public float rotationSpeed = 5f; // Speed of rotation
@@ -16,40 +18,36 @@ public class Shark : MonoBehaviour
     private float screenHeight;
     private bool wasWithinBoundary = true;
 
-    private Health _health;
+    private SharkHealth _sharkHealth;
     //Item drop
     public GameObject ItemToDrop;
     public int Coin;
     private DiverPlayer player;
 
-    // Material animation
-    private MaterialPropertyBlock _materialPropertyBlock;
-    private SkinnedMeshRenderer _skinnedMeshRenderer;
-
-    // State Machine
-    public enum CharacterState // type
-    {
-        Normal, Attacking, Dead, BeingHit
-    }
-    public CharacterState currentState; // variable for the type
-
     void Awake()
     {
+        _sharkHealth = GetComponent<SharkHealth>();
         _cc = GetComponent<CharacterController>();
         // Initialize random direction at start
         GenerateRandomDirection();
         screenWidth = CalculateScreenWidth();
         screenHeight = CalculateScreenHeight();
-        _skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
-        _materialPropertyBlock = new MaterialPropertyBlock();
-        _skinnedMeshRenderer.GetPropertyBlock(_materialPropertyBlock);
     }
 
     void FixedUpdate()
     {
         CalculateMovementShark();
+        CheckHealthShark();
+    }
 
-
+    private void CheckHealthShark()
+    {
+        if (_sharkHealth.CurrentHealth <= 0)
+        {
+            StartCoroutine(MaterialDissolve());
+            BoxCollider boxCollider = GetComponent<BoxCollider>();
+            boxCollider.enabled = false;
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -61,14 +59,21 @@ public class Shark : MonoBehaviour
             {
                 player.ApplyDamage(30);
             }
-            MaterialDissolve();
-            Destroy(this.gameObject, 2.8f);
         }
     }
 
+    public void ApplyDamage(int damage, Vector3 attackerPos = new Vector3())
+    {
+
+        if (_sharkHealth != null)
+        {
+            _sharkHealth.ApplyDamage(damage);
+        }
+
+    }
+   
     void CalculateMovementShark()
     {
-        // Move the object
         transform.Translate(-1 * randomDirection * moveSpeed * Time.deltaTime, Space.World);
 
         Vector3 clampedPosition = transform.position;
@@ -80,10 +85,8 @@ public class Shark : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(randomDirection);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-        // Update timer
         timer += Time.deltaTime;
 
-        // Check if it's time to change direction
         if (timer >= changeDirectionInterval)
         {
             GenerateRandomDirection();
@@ -99,11 +102,9 @@ public class Shark : MonoBehaviour
             transform.position = new Vector3(randomX, randomY, transform.position.z);
         }
 
-        // Update the flag for the next frame
         wasWithinBoundary = isWithinBoundary;
     }
 
-    // Generate a random direction
     void GenerateRandomDirection()
     {
         randomDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
@@ -111,7 +112,6 @@ public class Shark : MonoBehaviour
         randomDirection.y = 0;
     }
 
-    // Calculate screen width based on camera FOV and distance
     float CalculateScreenWidth()
     {
         Camera mainCamera = Camera.main;
@@ -139,16 +139,30 @@ public class Shark : MonoBehaviour
         return Mathf.Tan(mainCamera.fieldOfView * Mathf.Deg2Rad / 2) * distanceFromCamera * 2;
     }
 
-
     IEnumerator MaterialDissolve()
     {
-        yield return new WaitForSeconds(2);
+        float dissolveTimeDuration = 2f;
+        float currentDissolveTime = 0;
+        float dissolveAmount_start = 0f;
+        float dissolveAmount_target = 1f;
+        float dissolveAmount;
 
-        _materialPropertyBlock.SetFloat("_DissolveAmount", 1f);
-        _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBlock);
-
+        while (currentDissolveTime < dissolveTimeDuration)
+        {
+            currentDissolveTime += Time.deltaTime;
+            foreach (var item in _skinnedMeshRenderer)
+            {
+                dissolveAmount = Mathf.Lerp(dissolveAmount_start, dissolveAmount_target, currentDissolveTime / dissolveTimeDuration);
+                MaterialPropertyBlock materialPropertyBlock = new MaterialPropertyBlock();
+                materialPropertyBlock.SetFloat("_DissolveAmount", dissolveAmount);
+                item.SetPropertyBlock(materialPropertyBlock);
+            }
+            yield return null;
+        }
+        //Destroy(gameObject);
         DropItem();
     }
+
     public void DropItem()
     {
         if (ItemToDrop != null)

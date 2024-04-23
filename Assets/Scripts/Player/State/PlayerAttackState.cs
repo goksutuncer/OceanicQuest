@@ -16,6 +16,7 @@ public class PlayerAttackState : StateBase
         isInState = true;
         isFired = false;
         StartCoroutine(AimRoutine());
+        //_weaponInstance.boxCollider.enabled = false;
     }
 
     public override void ExitActions()
