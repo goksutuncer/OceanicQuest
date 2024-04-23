@@ -42,7 +42,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: cd1f82110866c48db839021cec4ed84e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6ba1a03decd6c45138b09243f795faf2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -62,7 +62,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 46d9687ceb9654b7ca55826feda1b673, type: 3}
+        m_Texture: {fileID: 2800000, guid: 64656aa09df6e45ea8722da5046db685, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -96,8 +96,8 @@ Material:
     - ClearCoatSmoothness: 1
     - DissolveEdgeWidth: 0.5
     - DissolveScale: 100
-    - Dissolve_Width: 1
-    - Fresnel: 10
+    - Dissolve_Width: 10
+    - Fresnel: 5
     - Metallic: 0
     - Smoothness: 1
     - Use_Fresnel: 0
@@ -108,7 +108,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.9371457
+    - _Glossiness: 0.9737173
     - _GlossyReflections: 1
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -121,16 +121,16 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     - _blink: 0
-    - _dissolve_height: 0
-    - _enableDissolve: 0
+    - _dissolve_height: 30
+    - _enableDissolve: 1
     m_Colors:
     - Blink_Color: {r: 1, g: 1, b: 1, a: 1}
-    - DissolveEdgeColor: {r: 29.85706, g: 0, b: 0, a: 0}
-    - Emssion_Color: {r: 0, g: 0, b: 0, a: 0}
+    - DissolveEdgeColor: {r: 0, g: 40.98012, b: 57.0379, a: 0}
+    - Emssion_Color: {r: 0, g: 0, b: 0, a: 1}
     - Fresnel_Color: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecColor: {r: 0.08990504, g: 0.08990504, b: 0.08990504, a: 1}
+    - _SpecColor: {r: 0.09600029, g: 0.09600029, b: 0.09600029, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &4541685157123635258
 MonoBehaviour:

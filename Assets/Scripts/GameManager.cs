@@ -40,10 +40,6 @@ public class GameManager : MonoBehaviour
             GameOver();
         }
     }
-    void RestartLevel()
-    {
-        SceneManager.LoadScene(0);
-    }
     void QuitGame()
     {
         Application.Quit();

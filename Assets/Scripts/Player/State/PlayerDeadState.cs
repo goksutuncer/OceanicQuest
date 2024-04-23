@@ -5,15 +5,10 @@ using UnityEngine;
 public class PlayerDeadState : StateBase
 {
     [SerializeField] private DiverPlayer _player = null;
-    [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer = null;
-
-    private MaterialPropertyBlock _materialPropertyBlock = null;
+    [SerializeField] private SkinnedMeshRenderer[] _skinnedMeshRenderer = null;
 
     public override void EnterActions()
     {
-        _materialPropertyBlock = new MaterialPropertyBlock();
-        _skinnedMeshRenderer.GetPropertyBlock(_materialPropertyBlock);
-
         _player.CharacterController.enabled = false;
         StartCoroutine(MaterialDissolve());
     }
@@ -31,16 +26,24 @@ public class PlayerDeadState : StateBase
         float dissolveHeight_target = -10f;
         float dissolveHeight;
 
-        _materialPropertyBlock.SetFloat("_enableDissolve", 1f);
-        _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBlock);
-
-        while (currentDissolveTime < dissolveTimeDuration)
+        foreach (var item in _skinnedMeshRenderer)
         {
-            currentDissolveTime += Time.deltaTime;
-            dissolveHeight = Mathf.Lerp(dissolveHeight_start, dissolveHeight_target, currentDissolveTime / dissolveTimeDuration);
-            _materialPropertyBlock.SetFloat("_dissolve_height", dissolveHeight);
-            _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBlock);
-            yield return null;
+            MaterialPropertyBlock materialPropertyBlock = new MaterialPropertyBlock();
+            item.GetPropertyBlock(materialPropertyBlock);
+            materialPropertyBlock.SetFloat("_enableDissolve", 1f);
+            item.SetPropertyBlock(materialPropertyBlock);
         }
+
+        foreach (var item in _skinnedMeshRenderer)
+            while (currentDissolveTime < dissolveTimeDuration)
+            {
+                currentDissolveTime += Time.deltaTime;
+                dissolveHeight = Mathf.Lerp(dissolveHeight_start, dissolveHeight_target, currentDissolveTime / dissolveTimeDuration);
+                MaterialPropertyBlock materialPropertyBlock = new MaterialPropertyBlock();
+                materialPropertyBlock.SetFloat("_dissolve_height", dissolveHeight);
+                item.SetPropertyBlock(materialPropertyBlock);
+                yield return null;
+            }
+
     }
 }

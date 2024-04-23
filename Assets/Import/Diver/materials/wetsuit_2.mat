@@ -122,8 +122,8 @@ Material:
     - ClearCoatSmoothness: 1
     - DissolveEdgeWidth: 0.5
     - DissolveScale: 100
-    - Dissolve_Width: 1
-    - Fresnel: 10
+    - Dissolve_Width: 10
+    - Fresnel: 5
     - Metallic: 0
     - Smoothness: 1
     - Use_Fresnel: 0
@@ -147,11 +147,11 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     - _blink: 0
-    - _dissolve_height: 0
-    - _enableDissolve: 0
+    - _dissolve_height: 30
+    - _enableDissolve: 1
     m_Colors:
     - Blink_Color: {r: 1, g: 1, b: 1, a: 1}
-    - DissolveEdgeColor: {r: 29.85706, g: 0, b: 0, a: 0}
+    - DissolveEdgeColor: {r: 0, g: 40.98012, b: 57.0379, a: 0}
     - Emssion_Color: {r: 0, g: 0, b: 0, a: 1}
     - Fresnel_Color: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

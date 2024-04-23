@@ -5,14 +5,12 @@ using UnityEngine;
 public class PlayerBeingHitState : StateBase
 {
     [SerializeField] private DiverPlayer _player;
-    [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer = null;
+    [SerializeField] private SkinnedMeshRenderer[] _skinnedMeshRenderer = null;
 
     private MaterialPropertyBlock _materialPropertyBlock = null;
     
     public override void EnterActions()
     {
-        _materialPropertyBlock = new MaterialPropertyBlock();
-        _skinnedMeshRenderer.GetPropertyBlock(_materialPropertyBlock);
 
         //AddImpact();
 
@@ -35,13 +33,37 @@ public class PlayerBeingHitState : StateBase
 
     IEnumerator MaterialBlink()
     {
-        _materialPropertyBlock.SetFloat("_blink", 0.4f);
-        _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBlock);
+        foreach (var item in _skinnedMeshRenderer)
+        {
+            MaterialPropertyBlock materialPropertyBlock = new MaterialPropertyBlock();
+            item.GetPropertyBlock(materialPropertyBlock);
+            materialPropertyBlock.SetFloat("_blink", 0.4f);
+            item.SetPropertyBlock(materialPropertyBlock);
+        }
 
         yield return new WaitForSeconds(0.2f);
 
-        _materialPropertyBlock.SetFloat("_blink", 0f);
-        _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBlock);
-        _player.PlayerStateController.ChangeState(EDiverPlayerState.Swim);
+        foreach (var item in _skinnedMeshRenderer)
+        {
+            MaterialPropertyBlock materialPropertyBlock = new MaterialPropertyBlock();
+            item.GetPropertyBlock(materialPropertyBlock);
+            materialPropertyBlock.SetFloat("_blink", 0f);
+            item.SetPropertyBlock(materialPropertyBlock);
+        }
+
+        CheckHealth();
+
+
+    }
+    private void CheckHealth()
+    {
+        if (_player.Health.CurrentHealth <= 0)
+        {
+            _player.PlayerStateController.ChangeState(EDiverPlayerState.Dead);
+        }
+        else
+        {
+            _player.PlayerStateController.ChangeState(EDiverPlayerState.Swim);
+        }
     }
 }

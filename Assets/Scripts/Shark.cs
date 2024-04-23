@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SharkMovement : MonoBehaviour
+public class Shark : MonoBehaviour
 {
     private CharacterController _cc;
     public float moveSpeed = 5f; // Speed of movement
@@ -20,7 +20,7 @@ public class SharkMovement : MonoBehaviour
     //Item drop
     public GameObject ItemToDrop;
     public int Coin;
-
+    private DiverPlayer player;
 
     // Material animation
     private MaterialPropertyBlock _materialPropertyBlock;
@@ -49,7 +49,23 @@ public class SharkMovement : MonoBehaviour
     {
         CalculateMovementShark();
 
+
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            DiverPlayer player = other.transform.GetComponent<DiverPlayer>();
+
+            if (player != null)
+            {
+                player.ApplyDamage(30);
+            }
+            MaterialDissolve();
+            Destroy(this.gameObject, 2.8f);
+        }
+    }
+
     void CalculateMovementShark()
     {
         // Move the object
@@ -122,15 +138,7 @@ public class SharkMovement : MonoBehaviour
         float distanceFromCamera = Mathf.Abs(transform.position.z - mainCamera.transform.position.z);
         return Mathf.Tan(mainCamera.fieldOfView * Mathf.Deg2Rad / 2) * distanceFromCamera * 2;
     }
-    
-    public void ApplyDamage(int damage, Vector3 attackerPos = new Vector3())
-    {
-        if (_health != null)
-        {
-            _health.ApplyDamage(damage);
-            Debug.Log("Health??");
-        }
-    }
+
 
     IEnumerator MaterialDissolve()
     {
