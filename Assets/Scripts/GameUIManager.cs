@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
 {
-    public GameManager GameManager;
     public TMPro.TextMeshProUGUI CoinText;
     public Slider HealthSlider;
     public GameObject UI_Pause;
     public GameObject UI_GameOver;
     public GameObject UI_GameIsFinished;
+    public DiverPlayer _player;
 
 
     // State Machine for UI
@@ -23,14 +23,15 @@ public class GameUIManager : MonoBehaviour
 
     private void Start()
     {
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<DiverPlayer>();
         SwitchUIState(GameUI_State.GamePlay);
     }
 
     // Update is called once per frame
     void Update()
     {
-        HealthSlider.value = GameManager.playerCharacter.GetComponent<Health>().CurrentHealthPercentage;
-        CoinText.text = GameManager.playerCharacter.Coin.ToString();
+        HealthSlider.value = _player.Health.CurrentHealthPercentage;
+        CoinText.text = _player.Coin.ToString();
     }
 
     private void SwitchUIState(GameUI_State state)
@@ -71,11 +72,11 @@ public class GameUIManager : MonoBehaviour
     }
     public void Button_MainMenu()
     {
-        GameManager.ReturnToTheMainMenu();
+        GameManager.Instance.ReturnToTheMainMenu();
     }
     public void Button_Restart()
     {
-        GameManager.Restart();
+        GameManager.Instance.Restart();
     }
     public void ShowGameOverUI()
     {

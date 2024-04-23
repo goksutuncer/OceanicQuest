@@ -11,19 +11,41 @@ public class GameManager : MonoBehaviour
     public DiverPlayer playerCharacter;
     private bool gameIsOver;
 
-    private void Awake()
+    // Static reference to the instance
+    private static GameManager instance;
+
+    // Getter for the instance
+    public static GameManager Instance
     {
-        playerCharacter = GameObject.FindGameObjectWithTag("Player").GetComponent<DiverPlayer>();
+        get
+        {
+            // If there is no GameManager instance yet, find it in the scene
+            if (instance == null)
+            {
+                instance = FindObjectOfType<GameManager>();
+
+                // If it's still null, create a new GameObject and add the GameManager component to it
+                if (instance == null)
+                {
+                    GameObject obj = new GameObject("GameManager");
+                    instance = obj.AddComponent<GameManager>();
+                }
+            }
+            return instance;
+        }
     }
 
-    private void GameOver()
+    public void GameOver()
+    {
+        gameIsOver = true;
+        gameUI_Manager.ShowGameOverUI();
+    }
+
+    public void GameFinished()
     {
         gameUI_Manager.ShowGameOverUI();
     }
-    private void GameFinished()
-    {
-        gameUI_Manager.ShowGameOverUI();
-    }
+
     private void Update()
     {
         if (gameIsOver)
@@ -34,16 +56,13 @@ public class GameManager : MonoBehaviour
         {
             gameUI_Manager.TogglePauseUI();
         }
-        if (playerCharacter.PlayerStateController.CurrentState == EDiverPlayerState.Dead)
-        {
-            gameIsOver = true;
-            GameOver();
-        }
     }
+
     void QuitGame()
     {
         Application.Quit();
     }
+
     public void ReturnToTheMainMenu()
     {
         Time.timeScale = 1f;

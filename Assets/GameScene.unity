@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Great_White_Shark
       objectReference: {fileID: 0}
+    - target: {fileID: 5909786144051047211, guid: 77f8479dec79840e7a0ce89a3ebfd83f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6427198955249650665, guid: 77f8479dec79840e7a0ce89a3ebfd83f, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -177,6 +181,14 @@ PrefabInstance:
     - target: {fileID: 6427198955249650665, guid: 77f8479dec79840e7a0ce89a3ebfd83f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8702324092245682287, guid: 77f8479dec79840e7a0ce89a3ebfd83f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9152654800445519355, guid: 77f8479dec79840e7a0ce89a3ebfd83f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77f8479dec79840e7a0ce89a3ebfd83f, type: 3}
@@ -239,6 +251,10 @@ PrefabInstance:
       propertyPath: _skinnedMeshRenderer.Array.data[4]
       value: 
       objectReference: {fileID: 496888056}
+    - target: {fileID: 6582678198382671369, guid: 73d650bee6edf4f26a1e105709f9f023, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7705399044867616537, guid: 73d650bee6edf4f26a1e105709f9f023, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -2504,12 +2520,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f30e0b68f0044333819edd2fc387cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameManager: {fileID: 858709989}
   CoinText: {fileID: 2767669643556842417}
   HealthSlider: {fileID: 2767669643522113778}
   UI_Pause: {fileID: 2767669644950781254}
   UI_GameOver: {fileID: 2767669645093041650}
   UI_GameIsFinished: {fileID: 2767669644796096085}
+  _player: {fileID: 0}
 --- !u!222 &2767669644643730976
 CanvasRenderer:
   m_ObjectHideFlags: 0

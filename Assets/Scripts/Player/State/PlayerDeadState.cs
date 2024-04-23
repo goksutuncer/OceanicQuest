@@ -45,6 +45,7 @@ public class PlayerDeadState : StateBase
             }
             yield return null;
         }
+        GameManager.Instance.GameOver();
 
     }
 }
