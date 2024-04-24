@@ -1579,6 +1579,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 796909001629555792, guid: 73d650bee6edf4f26a1e105709f9f023, type: 3}
+      propertyPath: _dashDuration
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3714465974344504572, guid: 73d650bee6edf4f26a1e105709f9f023, type: 3}
       propertyPath: m_Name
       value: Diver

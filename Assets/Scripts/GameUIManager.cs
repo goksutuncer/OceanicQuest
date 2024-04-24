@@ -55,9 +55,11 @@ public class GameUIManager : MonoBehaviour
                 break;
             case GameUI_State.GameOver:
                 UI_GameOver.SetActive(true);
+                UI_Game.SetActive(false);
                 break;
             case GameUI_State.GameIsFinished:
                 UI_GameIsFinished.SetActive(true);
+                UI_Game.SetActive(false);
                 break;
         }
         currentState = state;
