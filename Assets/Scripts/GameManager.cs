@@ -18,22 +18,17 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            // If there is no GameManager instance yet, find it in the scene
             if (instance == null)
             {
                 instance = FindObjectOfType<GameManager>();
-
-                // If it's still null, create a new GameObject and add the GameManager component to it
-                if (instance == null)
-                {
-                    GameObject obj = new GameObject("GameManager");
-                    instance = obj.AddComponent<GameManager>();
-                }
             }
+
             return instance;
         }
     }
+
     public Action OnGameOver { get; set; }
+
     public void GameOver()
     {
         gameIsOver = true;

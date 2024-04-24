@@ -21,7 +21,8 @@ public class SpawnManager : MonoBehaviour
     }
     private void OnDestroy()
     {
-        GameManager.Instance.OnGameOver -= OnGameOver;
+        if(GameManager.Instance)
+            GameManager.Instance.OnGameOver -= OnGameOver;
     }
 
     private void OnGameOver()
