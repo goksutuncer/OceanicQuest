@@ -1608,7 +1608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 691902086}
   _dashDuration: 0.1
-  _dashSpeed: 0.2
+  _dashSpeed: 0.1
 --- !u!1 &3070401697582238476
 GameObject:
   m_ObjectHideFlags: 0
