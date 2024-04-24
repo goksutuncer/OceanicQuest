@@ -13635,6 +13635,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CoinText: {fileID: 2767669643556842417}
   HealthSlider: {fileID: 2767669643522113778}
+  UI_Game: {fileID: 2767669645069374717}
   UI_Pause: {fileID: 2767669644950781254}
   UI_GameOver: {fileID: 2767669645093041650}
   UI_GameIsFinished: {fileID: 2767669644796096085}

@@ -8,6 +8,7 @@ public class GameUIManager : MonoBehaviour
 {
     public TMPro.TextMeshProUGUI CoinText;
     public Slider HealthSlider;
+    public GameObject UI_Game;
     public GameObject UI_Pause;
     public GameObject UI_GameOver;
     public GameObject UI_GameIsFinished;
@@ -45,10 +46,12 @@ public class GameUIManager : MonoBehaviour
         switch (state)
         {
             case GameUI_State.GamePlay:
+                UI_Game.SetActive(true);
                 break;
             case GameUI_State.Pause:
                 Time.timeScale = 0;
                 UI_Pause.SetActive(true);
+                UI_Game.SetActive(false);
                 break;
             case GameUI_State.GameOver:
                 UI_GameOver.SetActive(true);
