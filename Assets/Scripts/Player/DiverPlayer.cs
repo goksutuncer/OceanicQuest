@@ -45,15 +45,6 @@ public class DiverPlayer : MonoBehaviour
 
     public void ApplyDamage(int damage, Vector3 attackerPos = new Vector3())
     {
-        /*if (isInvincible)
-        {
-            return;
-        }*/
-        if (_health != null)
-        {
-            _health.ApplyDamage(damage);
-        }
-        
         _playerStateController.ChangeState(EDiverPlayerState.BeingHit);
     }
 

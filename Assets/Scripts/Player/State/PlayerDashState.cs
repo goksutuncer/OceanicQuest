@@ -1,26 +1,34 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerDashState : StateBase
 {
     [SerializeField] private DiverPlayer _player = null;
+    [SerializeField] private float _dashDuration = 0.2f;
+    [SerializeField] private float _dashSpeed = 5f;
+
     public override void EnterActions()
     {
-        StartCoroutine(DashSpeed());
+        StartCoroutine(Dash());
     }
 
     public override void ExitActions()
     {
     }
 
-    IEnumerator DashSpeed()
+    IEnumerator Dash()
     {
+        float timePassed = 0;
 
-        //_moveSpeed = 15f;
-        //yield return new WaitForSeconds(0.5f);
-        //_moveSpeed = 3.5f;
-        //SwitchStateTo(CharacterState.Normal);
-        yield break;
+        while(timePassed < _dashDuration)
+        {
+            timePassed += Time.deltaTime;
+
+            _player.CharacterController.Move(_player.transform.forward * _dashSpeed * -1);
+
+            yield return null;
+        }
+
+        _player.PlayerStateController.ChangeState(EDiverPlayerState.Swim);
     }
 }

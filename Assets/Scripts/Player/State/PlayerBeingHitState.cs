@@ -11,6 +11,11 @@ public class PlayerBeingHitState : StateBase
     
     public override void EnterActions()
     {
+        if (_player.Health != null)
+        {
+            //TODO: IStateTransitionData
+            _player.Health.ApplyDamage(30);
+        }
 
         //AddImpact();
 
