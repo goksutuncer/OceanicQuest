@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    private Shark shark;
 
     public void Fire()
     {
@@ -37,7 +36,7 @@ public class Weapon : MonoBehaviour
 
             if (shark != null)
             {
-                shark.ApplyDamage(30);
+                shark.ApplyDamage(50);
             }
             Destroy(gameObject);
         }

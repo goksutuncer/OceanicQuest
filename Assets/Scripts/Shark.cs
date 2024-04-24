@@ -24,6 +24,8 @@ public class Shark : MonoBehaviour
     public int Coin;
     private DiverPlayer player;
 
+    [SerializeField] private GameObject Blood_splatter;
+
     void Awake()
     {
         _sharkHealth = GetComponent<SharkHealth>();
@@ -68,10 +70,16 @@ public class Shark : MonoBehaviour
         if (_sharkHealth != null)
         {
             _sharkHealth.ApplyDamage(damage);
+            StartCoroutine(BloodSplash());
         }
 
     }
-   
+    IEnumerator BloodSplash()
+    {
+        Blood_splatter.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        Blood_splatter.SetActive(false);
+    }
     void CalculateMovementShark()
     {
         transform.Translate(-1 * randomDirection * moveSpeed * Time.deltaTime, Space.World);
@@ -159,7 +167,7 @@ public class Shark : MonoBehaviour
             }
             yield return null;
         }
-        //Destroy(gameObject);
+        Destroy(gameObject);
         DropItem();
     }
 
