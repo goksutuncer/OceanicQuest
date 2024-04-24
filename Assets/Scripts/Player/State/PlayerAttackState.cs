@@ -5,8 +5,8 @@ public class PlayerAttackState : StateBase
 {
     [SerializeField] private GameObject _weaponPrefab;
     [SerializeField] private DiverPlayer _player = null;
-
     [SerializeField] private Transform _weaponCarrier = null;
+    BoxCollider boxCollider;
     GameObject _weaponInstance;
     private bool isFired;
     private bool isInState;
@@ -16,7 +16,6 @@ public class PlayerAttackState : StateBase
         isInState = true;
         isFired = false;
         StartCoroutine(AimRoutine());
-        //_weaponInstance.boxCollider.enabled = false;
     }
 
     public override void ExitActions()
@@ -55,6 +54,8 @@ public class PlayerAttackState : StateBase
         _weaponInstance = Instantiate(
             _weaponPrefab,
             _weaponCarrier);
+        boxCollider = _weaponInstance.GetComponent<BoxCollider>();
+        boxCollider.enabled = false;
     }
 
     void Aim()

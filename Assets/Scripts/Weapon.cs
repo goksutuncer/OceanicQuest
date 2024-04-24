@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-
     public void Fire()
     {
         StartCoroutine(FireRoutine());
@@ -12,7 +11,9 @@ public class Weapon : MonoBehaviour
 
     private IEnumerator FireRoutine()
     {
+        BoxCollider boxCollider = GetComponent<BoxCollider>();
         transform.parent = null;
+        boxCollider.enabled = true;
 
         float timePassed = 0;
 
