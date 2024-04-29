@@ -32,7 +32,6 @@ public class Weapon : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            Debug.Log("SHark get HIT");
             Shark shark = other.transform.GetComponent<Shark>();
 
             if (shark != null)
