@@ -1,0 +1,11 @@
+Model Information:
+* title:	Bubble Test1
+* source:	https://sketchfab.com/3d-models/bubble-test1-543cdfb1b40540ecbd888122ceafb500
+* author:	domayor (https://sketchfab.com/domayor)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Bubble Test1" (https://sketchfab.com/3d-models/bubble-test1-543cdfb1b40540ecbd888122ceafb500) by domayor (https://sketchfab.com/domayor) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

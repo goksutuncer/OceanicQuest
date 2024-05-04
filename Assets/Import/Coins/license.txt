@@ -1,0 +1,11 @@
+Model Information:
+* title:	Coins
+* source:	https://sketchfab.com/3d-models/coins-ea49e4badaba4dd896430af6e791bdce
+* author:	SquidSlayerNate (https://sketchfab.com/SquidSlayerNate)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Coins" (https://sketchfab.com/3d-models/coins-ea49e4badaba4dd896430af6e791bdce) by SquidSlayerNate (https://sketchfab.com/SquidSlayerNate) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

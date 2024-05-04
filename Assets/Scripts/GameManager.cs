@@ -9,11 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public GameUIManager gameUI_Manager;
     private bool gameIsOver;
-
-    // Static reference to the instance
     private static GameManager instance;
-
-    // Getter for the instance
     public static GameManager Instance
     {
         get
