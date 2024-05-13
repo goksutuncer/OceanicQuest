@@ -6,6 +6,8 @@ public class PlayerSwimState : StateBase
 {
     [SerializeField] private DiverPlayer _player = null;
     [SerializeField] private float _moveSpeed = 5f;
+    public bool _isSpeedBoostActive = false;
+    private float _speedMultiplier = 3;
 
     private float screenWidth;
     private float screenHeight;
@@ -81,6 +83,19 @@ public class PlayerSwimState : StateBase
 
         float distanceFromCamera = Mathf.Abs(_player.transform.position.z - mainCamera.transform.position.z);
         return Mathf.Tan(mainCamera.fieldOfView * Mathf.Deg2Rad / 2) * distanceFromCamera * 2;
+    }
+
+    public void SpeedBoostActive()
+    {
+        _isSpeedBoostActive = true;
+        _movementVelocity *= _speedMultiplier * Time.deltaTime;
+        StartCoroutine(SpeedBoostPowerDownRoutine());
+    }
+    IEnumerator SpeedBoostPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5.0f);
+        _isSpeedBoostActive = false;
+        _movementVelocity /= _speedMultiplier * Time.deltaTime;
     }
 
 }

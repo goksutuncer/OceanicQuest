@@ -1,0 +1,11 @@
+Model Information:
+* title:	The Legend of Zelda - Hylian Shield
+* source:	https://sketchfab.com/3d-models/the-legend-of-zelda-hylian-shield-dfa1a8f89b5d41a7b226a24779c5d1ab
+* author:	Kiklox (https://sketchfab.com/kiklox)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "The Legend of Zelda - Hylian Shield" (https://sketchfab.com/3d-models/the-legend-of-zelda-hylian-shield-dfa1a8f89b5d41a7b226a24779c5d1ab) by Kiklox (https://sketchfab.com/kiklox) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

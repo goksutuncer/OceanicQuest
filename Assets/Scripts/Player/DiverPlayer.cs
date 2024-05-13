@@ -14,10 +14,16 @@ public class DiverPlayer : MonoBehaviour
     [SerializeField] private CharacterController _cc;
     public CharacterController CharacterController => _cc;
 
-
     [SerializeField] private Health _health;
     public Health Health => _health;
+
+    [SerializeField] private PlayerSwimState _playerSwimState;
+    public PlayerSwimState PlayerSwimState => _playerSwimState;
+
     public bool isInvincible;
+    public GameObject _shieldVisualizer;
+
+    public bool _isShieldActive = false;
 
     //Pick up
     public GameObject ItemToDrop;
@@ -71,4 +77,13 @@ public class DiverPlayer : MonoBehaviour
     {
         Coin += coin;
     }
+
+   
+    public void ShieldActive()
+    {
+        _isShieldActive = true;
+        _shieldVisualizer.gameObject.SetActive(true);
+
+    }
+
 }

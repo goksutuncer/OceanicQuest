@@ -1,0 +1,11 @@
+Model Information:
+* title:	Double Points Pickup
+* source:	https://sketchfab.com/3d-models/double-points-pickup-8b0ad23e33364f71a8207e97970e9f27
+* author:	Jordan Holm (10790501) (https://sketchfab.com/10790501)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Double Points Pickup" (https://sketchfab.com/3d-models/double-points-pickup-8b0ad23e33364f71a8207e97970e9f27) by Jordan Holm (10790501) (https://sketchfab.com/10790501) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
