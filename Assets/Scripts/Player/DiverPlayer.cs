@@ -20,6 +20,9 @@ public class DiverPlayer : MonoBehaviour
     [SerializeField] private PlayerSwimState _playerSwimState;
     public PlayerSwimState PlayerSwimState => _playerSwimState;
 
+    [SerializeField] private Weapon _weapon;
+    public Weapon Weapon => _weapon;
+
     public bool isInvincible;
     public GameObject _shieldVisualizer;
 
@@ -32,7 +35,6 @@ public class DiverPlayer : MonoBehaviour
     void Awake()
     {
         _health = GetComponent<Health>();
-
     }
     
     // Update is called once per frame

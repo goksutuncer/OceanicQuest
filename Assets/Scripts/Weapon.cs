@@ -4,9 +4,26 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    int damage = 50;
+    public bool _isDamageBoostActive = false;
+    private int _damgageMultiplier = 2;
+
     public void Fire()
     {
         StartCoroutine(FireRoutine());
+    }
+
+    public void DamageBoostActive()
+    {
+        _isDamageBoostActive = true;
+        damage *= _damgageMultiplier;
+        StartCoroutine(DamageBoostPowerDownRoutine());
+    }
+    IEnumerator DamageBoostPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5.0f);
+        _isDamageBoostActive = false;
+        damage /= _damgageMultiplier;
     }
 
     private IEnumerator FireRoutine()
@@ -36,7 +53,7 @@ public class Weapon : MonoBehaviour
 
             if (shark != null)
             {
-                shark.ApplyDamage(50);
+                shark.ApplyDamage(damage);
             }
             Destroy(gameObject);
         }

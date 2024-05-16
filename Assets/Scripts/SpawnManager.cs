@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -9,14 +10,14 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject _enemyContainer;
     private bool _stopSpawning = false;
-
-    //private GameObject[] _powerups;
-
+    [SerializeField] private PowerUpManager _powerupManager;
+    [SerializeField] private GameObject[] _powerups;
+    [SerializeField] private DiverPlayer _player;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SpawnEnemyRoutine());
+        StartSpawning();
         GameManager.Instance.OnGameOver += OnGameOver;
     }
     private void OnDestroy()
@@ -32,9 +33,9 @@ public class SpawnManager : MonoBehaviour
 
     public void StartSpawning()
     {
+        StartCoroutine(SpawnPowerupRoutine());
         StartCoroutine(SpawnEnemyRoutine());
-        //StartCoroutine(SpawnPowerupRoutine());
-
+        
     }
 
     IEnumerator SpawnEnemyRoutine()
@@ -53,28 +54,22 @@ public class SpawnManager : MonoBehaviour
        
     }
 
-    /*IEnumerator SpawnPowerupRoutine()
+    IEnumerator SpawnPowerupRoutine()
     {
-        yield return new WaitForSeconds(3.0f);
+        //yield return new WaitForSeconds(3.0f);
+       
         while (_stopSpawning == false)
         {
-            Vector3 posofPowerup = new Vector3(UnityEngine.Random.Range(-8f, 8f), 7, 0);
+            Vector3 posofPowerup = new Vector3(Random.Range(-10f, 10f), -6, 0);
+            GameObject powerUpPrefab = _powerups[Random.Range(0, _powerups.Length)];
+            GameObject spawnedPowerUp = _powerupManager.GetPowerUpFromPool(powerUpPrefab);
+            spawnedPowerUp.transform.position = posofPowerup;
+            spawnedPowerUp.SetActive(true);
 
-            if (_diverPlayer._isShieldActive == false)
-            {
-                Instantiate(_powerups[UnityEngine.Random.Range(0, 3)], posofPowerup, Quaternion.identity);
-
-            }
-            else
-            {
-                Instantiate(_powerups[UnityEngine.Random.Range(0, 2)], posofPowerup, Quaternion.identity);
-            }
-
-            yield return new WaitForSeconds(UnityEngine.Random.Range(3, 8));
-
+            yield return new WaitForSeconds(Random.Range(3, 8));
         }
 
-    }*/
+    }
 
 
 }
