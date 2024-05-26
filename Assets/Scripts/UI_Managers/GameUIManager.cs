@@ -12,7 +12,8 @@ public class GameUIManager : MonoBehaviour
     public GameObject UI_Pause;
     public GameObject UI_GameOver;
     public GameObject UI_GameIsFinished;
-    public DiverPlayer _player;
+    private DiverPlayer _player;
+    public GoldManager _goldManager;
 
 
     // State Machine for UI
@@ -32,7 +33,7 @@ public class GameUIManager : MonoBehaviour
     void Update()
     {
         HealthSlider.value = _player.Health.CurrentHealthPercentage;
-        CoinText.text = _player.Coin.ToString();
+        CoinText.text = _goldManager.currentGold.ToString();
     }
 
     private void SwitchUIState(GameUI_State state)

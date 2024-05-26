@@ -189,6 +189,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8636754435086181623}
   - component: {fileID: 572484025}
+  - component: {fileID: 4082183716475861363}
+  - component: {fileID: 3013774956364415334}
   m_Layer: 0
   m_Name: Coins
   m_TagString: Untagged
@@ -233,6 +235,36 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &4082183716475861363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4877689038343613885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1cb87b3475fb4cfe850e7e99c2a8e89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnTimeSeconds: 8
+  goldGained: 1
+  sphereCollider: {fileID: 3013774956364415334}
+  visual: {fileID: 8696214948815132550}
+  bubble: {fileID: 8312941048380958481}
+--- !u!135 &3013774956364415334
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4877689038343613885}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: -0.06, y: 0.45, z: 0}
 --- !u!1 &4894552281806648258
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,7 +488,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5382110967415536661}
   m_Layer: 0
-  m_Name: Sketchfab_model
+  m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -637,5 +669,10 @@ PrefabInstance:
 --- !u!4 &8312941048380958480 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8312941047311393082, guid: 43d9e633ed3304905811ceed01dbcb9e, type: 3}
+  m_PrefabInstance: {fileID: 1077986858}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8312941048380958481 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8312941047311393083, guid: 43d9e633ed3304905811ceed01dbcb9e, type: 3}
   m_PrefabInstance: {fileID: 1077986858}
   m_PrefabAsset: {fileID: 0}

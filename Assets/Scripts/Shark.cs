@@ -22,7 +22,7 @@ public class Shark : MonoBehaviour
     //Item drop
     public GameObject ItemToDrop;
     public int Coin;
-    private DiverPlayer player;
+
 
     [SerializeField] private GameObject Blood_splatter;
 
@@ -49,6 +49,7 @@ public class Shark : MonoBehaviour
             StartCoroutine(MaterialDissolve());
             BoxCollider boxCollider = GetComponent<BoxCollider>();
             boxCollider.enabled = false;
+            QuestManager.Instance.UpdateProgress("Enemy", 1);
         }
     }
     private void OnTriggerEnter(Collider other)

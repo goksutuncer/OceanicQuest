@@ -13,6 +13,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private PowerUpManager _powerupManager;
     [SerializeField] private GameObject[] _powerups;
     [SerializeField] private DiverPlayer _player;
+    [SerializeField] private GameObject _coinPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +38,15 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SpawnEnemyRoutine());
         
     }
-
+    IEnumerator SpawnCoinRoutine()
+    {
+        while (_stopSpawning == false)
+        {
+            Vector3 posofCoin = new Vector3(Random.Range(-10f, 10f), -6, 0);
+            GameObject newCoin = Instantiate(_coinPrefab, posofCoin, Quaternion.identity);
+            yield return new WaitForSeconds(Random.Range(1, 3));
+        }
+    }
     IEnumerator SpawnEnemyRoutine()
     {
         while (_stopSpawning == false)

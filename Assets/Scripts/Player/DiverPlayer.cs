@@ -28,10 +28,6 @@ public class DiverPlayer : MonoBehaviour
 
     public bool _isShieldActive = false;
 
-    //Pick up
-    public GameObject ItemToDrop;
-    public int Coin;
-
     void Awake()
     {
         _health = GetComponent<Health>();
@@ -56,30 +52,12 @@ public class DiverPlayer : MonoBehaviour
         _playerStateController.ChangeState(EDiverPlayerState.BeingHit);
     }
 
-    public void PickUpItem(PickUp item)
-    {
-        switch (item.Type)
-        {
-            case PickUp.PickUpType.Heal:
-                AddHealth(item.Value);
-                break;
-            case PickUp.PickUpType.Coin:
-                AddCoin(item.Value);
-                break;
-        }
-    }
 
     private void AddHealth(int health)
     {
         _health.AddHealth(health);
         //GetComponent<PlayerVFXManager>().PlayHealVFX();
     }
-
-    private void AddCoin(int coin)
-    {
-        Coin += coin;
-    }
-
    
     public void ShieldActive()
     {
