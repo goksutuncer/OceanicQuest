@@ -122,7 +122,7 @@ public class MantaBehaviour : MonoBehaviour
         float dissolveTimeDuration = 2f;
         float currentDissolveTime = 0;
         float dissolveAmount_start = 0f;
-        float dissolveAmount_target = 1f;
+        float dissolveAmount_target = 0.6f;
         float dissolveAmount;
 
         while (currentDissolveTime < dissolveTimeDuration)

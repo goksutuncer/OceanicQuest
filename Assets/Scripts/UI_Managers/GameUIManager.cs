@@ -14,6 +14,8 @@ public class GameUIManager : MonoBehaviour
     public GameObject UI_GameIsFinished;
     private DiverPlayer _player;
     public GoldManager _goldManager;
+    public TMPro.TextMeshProUGUI QuestName;
+    public QuestManager QuestManager;
 
 
     // State Machine for UI
@@ -34,6 +36,12 @@ public class GameUIManager : MonoBehaviour
     {
         HealthSlider.value = _player.Health.CurrentHealthPercentage;
         CoinText.text = _goldManager.currentGold.ToString();
+        
+        if (QuestManager.ActiveQuest != null)
+        {
+            QuestInfoSO infoSO = QuestManager.ActiveQuest.info;
+            QuestName.text = infoSO.displayName;
+        }
     }
 
     private void SwitchUIState(GameUI_State state)

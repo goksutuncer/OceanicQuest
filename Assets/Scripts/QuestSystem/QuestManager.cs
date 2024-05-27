@@ -9,6 +9,8 @@ public class QuestManager : MonoBehaviour
 
     private Dictionary<string, Quest> questMap;
 
+    public Quest ActiveQuest;
+
     // quest start requirements
     private int currentPlayerLevel;
 
@@ -44,13 +46,14 @@ public class QuestManager : MonoBehaviour
 
         foreach (Quest quest in questMap.Values)
         {
+            quest.state = QuestState.REQUIREMENTS_NOT_MET;
             // initialize any loaded quest steps
-            if (quest.state == QuestState.IN_PROGRESS)
+            /*if (quest.state == QuestState.IN_PROGRESS)
             {
                 quest.InstantiateCurrentQuestStep(this.transform);
-            }
+            }*/
             // broadcast the initial state of all quests on startup
-            GameEventsManager.instance.questEvents.QuestStateChange(quest);
+            //GameEventsManager.instance.questEvents.QuestStateChange(quest);
         }
     }
 
@@ -107,6 +110,7 @@ public class QuestManager : MonoBehaviour
         Quest quest = GetQuestById(id);
         quest.InstantiateCurrentQuestStep(this.transform);
         ChangeQuestState(quest.info.id, QuestState.IN_PROGRESS);
+        ActiveQuest = quest;
     }
 
     private void AdvanceQuest(string id)

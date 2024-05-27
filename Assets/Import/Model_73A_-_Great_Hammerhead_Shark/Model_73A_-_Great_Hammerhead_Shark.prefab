@@ -3236,7 +3236,7 @@ MonoBehaviour:
   moveSpeed: 5
   rotationSpeed: 5
   changeDirectionInterval: 3
-  ItemToDrop: {fileID: 0}
+  ItemToDrop: {fileID: 4877689038343613885, guid: 7ba5743310215409986d1b15d201f43b, type: 3}
   Coin: 0
   Blood_splatter: {fileID: 4591376516536889643}
 --- !u!54 &8206653601105794308
