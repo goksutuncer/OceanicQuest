@@ -19,6 +19,7 @@ public class Shark : MonoBehaviour
     private bool wasWithinBoundary = true;
 
     private SharkHealth _sharkHealth;
+
     //Item drop
     public GameObject ItemToDrop;
     public int Coin;
@@ -49,7 +50,6 @@ public class Shark : MonoBehaviour
             StartCoroutine(MaterialDissolve());
             BoxCollider boxCollider = GetComponent<BoxCollider>();
             boxCollider.enabled = false;
-            QuestManager.Instance.UpdateProgress("Enemy", 1);
         }
     }
     private void OnTriggerEnter(Collider other)

@@ -24,7 +24,14 @@ public class PlayerLevelManager : MonoBehaviour
 
     private void OnDisable()
     {
-        GameEventsManager.instance.playerEvents.onExperienceGained -= ExperienceGained;
+        if(GameEventsManager.instance != null)
+        {
+            GameEventsManager.instance.playerEvents.onExperienceGained -= ExperienceGained;
+        }
+        else
+        {
+            return;
+        }
     }
 
     private void Start()

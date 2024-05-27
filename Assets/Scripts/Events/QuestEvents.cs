@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
 using System;
 
-public class QuestEvents : MonoBehaviour
+public class QuestEvents
 {
     public event Action<string> onStartQuest;
-    public void StartQuest (string id)
+    public void StartQuest(string id)
     {
-        if(onStartQuest != null)
+        if (onStartQuest != null)
         {
             onStartQuest(id);
         }
@@ -32,12 +30,21 @@ public class QuestEvents : MonoBehaviour
         }
     }
 
-    /*public event Action<string> onQuestStateChange;
-    public void QuestStateChange(string id, int stepIndex, QuestStepState questStepState)
+    public event Action<Quest> onQuestStateChange;
+    public void QuestStateChange(Quest quest)
     {
         if (onQuestStateChange != null)
         {
-            onQuestStateChange(id, stepIndex, questStepState);
+            onQuestStateChange(quest);
         }
-    }*/
+    }
+
+    public event Action<string, int, QuestStepState> onQuestStepStateChange;
+    public void QuestStepStateChange(string id, int stepIndex, QuestStepState questStepState)
+    {
+        if (onQuestStepStateChange != null)
+        {
+            onQuestStepStateChange(id, stepIndex, questStepState);
+        }
+    }
 }

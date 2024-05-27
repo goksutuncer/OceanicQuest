@@ -26,14 +26,20 @@ public class DiverPlayer : MonoBehaviour
     public bool isInvincible;
     public GameObject _shieldVisualizer;
 
+    //weapon damage
+    public bool _isDamageBoostActive = false;
+    private int _damage = 50;
+    private int _multidamage = 100;
+
+
     public bool _isShieldActive = false;
 
     void Awake()
     {
         _health = GetComponent<Health>();
+
     }
     
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (_playerInput.MouseButtonDown)
@@ -46,12 +52,42 @@ public class DiverPlayer : MonoBehaviour
         }
         _playerInput.ClearCache();
     }
+    public int Damage()
+    {
+        if (_isDamageBoostActive == true)
+        {
+            Debug.Log("damage is multi");
+            return _multidamage;
+        }
+        else
+        {
+            Debug.Log("damage is normal");
+            return _damage;
+        }
+    }
 
     public void ApplyDamage(int damage, Vector3 attackerPos = new Vector3())
     {
         _playerStateController.ChangeState(EDiverPlayerState.BeingHit);
-    }
+        if (_isShieldActive == true)
+        {
+            _isShieldActive = false;
+            _shieldVisualizer.gameObject.SetActive(false);
+        }
 
+    }
+    public void DamageBoostActive()
+    {
+        _isDamageBoostActive = true;
+        StartCoroutine(DamageBoostPowerDownRoutine());
+        Debug.Log("damageboostactive");
+    }
+    IEnumerator DamageBoostPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(10.0f);
+        _isDamageBoostActive = false;
+        Debug.Log("damageboost deactive");
+    }
 
     private void AddHealth(int health)
     {

@@ -13,6 +13,7 @@ public class PlayerEvents : MonoBehaviour
             onExperienceGained(experience);
         }
     }
+
     public event Action<int> onPlayerLevelChange;
     public void PlayerLevelChange (int level)
     {
@@ -21,6 +22,7 @@ public class PlayerEvents : MonoBehaviour
             onPlayerLevelChange(level);
         }
     }
+
     public event Action<int> onPlayerExperienceChange;
     public void PlayerExperienceChange (int experience)
     {

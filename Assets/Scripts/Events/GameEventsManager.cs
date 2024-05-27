@@ -22,4 +22,5 @@ public class GameEventsManager : MonoBehaviour
     public GoldEvents goldEvents = new GoldEvents();
     public MiscEvents miscEvents = new MiscEvents();
     public QuestEvents questEvents = new QuestEvents();
+    public InputEvents inputEvents = new InputEvents();
 }

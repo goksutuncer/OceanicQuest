@@ -40,8 +40,7 @@ public class PowerUpBehaviour : MonoBehaviour
                         player.ShieldActive();
                         break;
                     case 3:
-                        player.Weapon.DamageBoostActive();
-                        Debug.Log("Damafgggee");
+                        player.DamageBoostActive();
                         break;
                     default:
                         Debug.Log("Default Value");
