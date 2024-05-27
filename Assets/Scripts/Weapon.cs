@@ -1,11 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] private DiverPlayer _diverPlayer;
+    private DiverPlayer _player;
 
+    public void InitDiver(DiverPlayer diverPlayer)
+    {
+        _player = diverPlayer;
+    }
 
     public void Fire()
     {
@@ -39,8 +42,8 @@ public class Weapon : MonoBehaviour
 
             if (shark != null)
             {
-                shark.ApplyDamage(_diverPlayer.Damage());
-                Debug.Log(_diverPlayer.Damage());
+                shark.ApplyDamage(_player.Damage());
+                Debug.Log(_player.Damage());
             }
             Destroy(gameObject);
         }

@@ -54,6 +54,9 @@ public class PlayerAttackState : StateBase
         _weaponInstance = Instantiate(
             _weaponPrefab,
             _weaponCarrier);
+
+        _weaponInstance.GetComponent<Weapon>().InitDiver(_player);
+
         boxCollider = _weaponInstance.GetComponent<BoxCollider>();
         boxCollider.enabled = false;
     }

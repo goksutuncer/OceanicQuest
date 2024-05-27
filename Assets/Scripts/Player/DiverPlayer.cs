@@ -27,7 +27,7 @@ public class DiverPlayer : MonoBehaviour
     public GameObject _shieldVisualizer;
 
     //weapon damage
-    public bool _isDamageBoostActive = false;
+    private bool _isDamageBoostActive = false;
     private int _damage = 50;
     private int _multidamage = 100;
 
