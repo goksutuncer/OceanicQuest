@@ -56,12 +56,10 @@ public class DiverPlayer : MonoBehaviour
     {
         if (_isDamageBoostActive == true)
         {
-            Debug.Log("damage is multi");
             return _multidamage;
         }
         else
         {
-            Debug.Log("damage is normal");
             return _damage;
         }
     }
@@ -80,13 +78,11 @@ public class DiverPlayer : MonoBehaviour
     {
         _isDamageBoostActive = true;
         StartCoroutine(DamageBoostPowerDownRoutine());
-        Debug.Log("damageboostactive");
     }
     IEnumerator DamageBoostPowerDownRoutine()
     {
         yield return new WaitForSeconds(10.0f);
         _isDamageBoostActive = false;
-        Debug.Log("damageboost deactive");
     }
 
     private void AddHealth(int health)
