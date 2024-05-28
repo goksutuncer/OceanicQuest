@@ -40,7 +40,6 @@ public class MantaBehaviour : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Collided");
             StartCoroutine(MaterialDissolve());
             SphereCollider sphereCollider = GetComponent<SphereCollider>();
             sphereCollider.enabled = false;

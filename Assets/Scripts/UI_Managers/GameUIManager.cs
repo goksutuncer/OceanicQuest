@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
 {
-    public TMPro.TextMeshProUGUI CoinText;
+    public TextMeshProUGUI CoinText;
     public Slider HealthSlider;
     public GameObject UI_Game;
     public GameObject UI_Pause;
@@ -14,9 +14,9 @@ public class GameUIManager : MonoBehaviour
     public GameObject UI_GameIsFinished;
     private DiverPlayer _player;
     public GoldManager _goldManager;
-    public TMPro.TextMeshProUGUI QuestName;
+    public TextMeshProUGUI QuestName;
+    public TextMeshProUGUI QuestDescription;
     public QuestManager QuestManager;
-
 
     // State Machine for UI
     private enum GameUI_State
@@ -36,15 +36,29 @@ public class GameUIManager : MonoBehaviour
     {
         HealthSlider.value = _player.Health.CurrentHealthPercentage;
         CoinText.text = _goldManager.currentGold.ToString();
-        
+
         if (QuestManager.ActiveQuest != null)
         {
             QuestInfoSO infoSO = QuestManager.ActiveQuest.info;
+            Quest activequest = QuestManager.ActiveQuest;
             QuestName.text = infoSO.displayName;
+            SetQuestLogInfo(activequest);
         }
     }
+    private void SetQuestLogInfo(Quest quest)
+    {
+        // quest name
+        QuestName.text = quest.info.displayName;
 
-    private void SwitchUIState(GameUI_State state)
+        // status
+        QuestDescription.text = quest.GetFullStatusText();
+
+        // rewards
+        //goldRewardsText.text = quest.info.goldReward + " Gold";
+        //experienceRewardsText.text = quest.info.experienceReward + " XP";
+    }
+
+        private void SwitchUIState(GameUI_State state)
     {
         UI_Pause.SetActive(false);
         UI_GameOver.SetActive(false);

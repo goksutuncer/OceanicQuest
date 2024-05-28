@@ -207,26 +207,28 @@ public class QuestManager : MonoBehaviour
 
     private Quest LoadQuest(QuestInfoSO questInfo)
     {
-        Quest quest = null;
-        try
-        {
-            // load quest from saved data
-            if (PlayerPrefs.HasKey(questInfo.id) && loadQuestState)
-            {
-                string serializedData = PlayerPrefs.GetString(questInfo.id);
-                QuestData questData = JsonUtility.FromJson<QuestData>(serializedData);
-                quest = new Quest(questInfo, questData.state, questData.questStepIndex, questData.questStepStates);
-            }
-            // otherwise, initialize a new quest
-            else
-            {
-                quest = new Quest(questInfo);
-            }
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Failed to load quest with id " + quest.info.id + ": " + e);
-        }
+        Quest quest = new Quest(questInfo);
+
+        //Quest quest = null;
+        //try
+        //{
+        //    // load quest from saved data
+        //    if (PlayerPrefs.HasKey(questInfo.id) && loadQuestState)
+        //    {
+        //        string serializedData = PlayerPrefs.GetString(questInfo.id);
+        //        QuestData questData = JsonUtility.FromJson<QuestData>(serializedData);
+        //        quest = new Quest(questInfo, questData.state, questData.questStepIndex, questData.questStepStates);
+        //    }
+        //    // otherwise, initialize a new quest
+        //    else
+        //    {
+        //        quest = new Quest(questInfo);
+        //    }
+        //}
+        //catch (System.Exception e)
+        //{
+        //    Debug.LogError("Failed to load quest with id " + quest.info.id + ": " + e);
+        //}
         return quest;
     }
 }

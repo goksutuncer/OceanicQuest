@@ -12,10 +12,8 @@ public abstract class QuestStep : MonoBehaviour
     {
         this.questId = questId;
         this.stepIndex = stepIndex;
-        if (questStepState != null && questStepState != "")
-        {
-            SetQuestStepState(questStepState);
-        }
+
+        SetQuestStepState(questStepState);
     }
 
     protected void FinishQuestStep()

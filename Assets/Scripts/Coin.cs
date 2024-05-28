@@ -19,15 +19,13 @@ public class Coin : MonoBehaviour
         transform.Translate(Vector3.up * _speed * Time.deltaTime);
         if (transform.position.y >= 6.50f)
         {
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 
     private void CollectCoin()
     {
-        sphereCollider.enabled = false;
-        visual.gameObject.SetActive(false);
-        bubble.gameObject.SetActive(false);
+        Destroy(gameObject);
         GameEventsManager.instance.goldEvents.GoldGained(goldGained);
         GameEventsManager.instance.miscEvents.CoinCollected();
         StopAllCoroutines();
@@ -36,9 +34,7 @@ public class Coin : MonoBehaviour
     private IEnumerator RespawnAfterTime()
     {
         yield return new WaitForSeconds(respawnTimeSeconds);
-        sphereCollider.enabled = true;
-        visual.gameObject.SetActive(true);
-        bubble.gameObject.SetActive(true);
+       //Instantiate();
     }
 
 
