@@ -128,7 +128,7 @@ public class QuestManager : MonoBehaviour
         // if there are no more steps, then we've finished all of them for this quest
         else
         {
-            ChangeQuestState(quest.info.id, QuestState.CAN_FINISH);
+            ChangeQuestState(quest.info.id, QuestState.FINISHED);
         }
     }
 
