@@ -123,7 +123,8 @@ public class QuestManager : MonoBehaviour
 
     private void StartQuest(string id)
     {
-        Quest quest = GetQuestById(id);
+        Quest quest = new Quest(questMap[id].info);
+        questMap[id] = quest;
         quest.InstantiateCurrentQuestStep(this.transform);
         ChangeQuestState(quest.info.id, QuestState.IN_PROGRESS);
         ActiveQuest = quest;

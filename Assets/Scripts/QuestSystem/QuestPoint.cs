@@ -42,7 +42,7 @@ public class QuestPoint : MonoBehaviour
             currentQuestState = QuestManager.instance.GetQuestById(questId).state;
 
             // start or finish a quest
-            if (currentQuestState.Equals(QuestState.CAN_START))
+            if (currentQuestState.Equals(QuestState.CAN_START) || currentQuestState.Equals(QuestState.FINISHED))
             {
                 GameEventsManager.instance.questEvents.StartQuest(questId);
             }
