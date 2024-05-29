@@ -121,11 +121,6 @@ public class Quest
             {
                 fullStatus += questStepStates[currentQuestStepIndex].status;
             }
-            // when the quest is completed or turned in
-            if (state == QuestState.CAN_FINISH)
-            {
-                fullStatus += "The quest is ready to be turned in.";
-            }
             else if (state == QuestState.FINISHED)
             {
                 fullStatus += "The quest has been completed!";

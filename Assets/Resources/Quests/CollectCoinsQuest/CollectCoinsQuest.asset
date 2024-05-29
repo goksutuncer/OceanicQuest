@@ -16,6 +16,7 @@ MonoBehaviour:
   displayName: Collect The Coins!
   levelRequirement: 1
   questPrerequisites: []
-  questStepPrefabs: []
+  questStepPrefabs:
+  - {fileID: 667630441395693348, guid: 90a33a4c9221c4e81940e5927501821a, type: 3}
   goldReward: 50
   experienceReward: 250

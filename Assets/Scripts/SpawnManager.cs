@@ -36,17 +36,20 @@ public class SpawnManager : MonoBehaviour
     {
         StartCoroutine(SpawnPowerupRoutine());
         StartCoroutine(SpawnEnemyRoutine());
-        
+        StartCoroutine(SpawnCoinRoutine());
     }
+
     IEnumerator SpawnCoinRoutine()
     {
         while (_stopSpawning == false)
         {
             Vector3 posofCoin = new Vector3(Random.Range(-10f, 10f), -6, 0);
             GameObject newCoin = Instantiate(_coinPrefab, posofCoin, Quaternion.identity);
-            yield return new WaitForSeconds(Random.Range(1, 3));
+            yield return new WaitForSeconds(Random.Range(5, 8));
         }
     }
+
+     
     IEnumerator SpawnEnemyRoutine()
     {
         while (_stopSpawning == false)
@@ -65,7 +68,6 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnPowerupRoutine()
     {
-        //yield return new WaitForSeconds(3.0f);
        
         while (_stopSpawning == false)
         {

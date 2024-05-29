@@ -1,0 +1,11 @@
+Model Information:
+* title:	Sky Ray
+* source:	https://sketchfab.com/3d-models/sky-ray-a5b664fa91004f6e917a2d627c31bdce
+* author:	Ben.Carino (https://sketchfab.com/Ben.Carino)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Sky Ray" (https://sketchfab.com/3d-models/sky-ray-a5b664fa91004f6e917a2d627c31bdce) by Ben.Carino (https://sketchfab.com/Ben.Carino) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

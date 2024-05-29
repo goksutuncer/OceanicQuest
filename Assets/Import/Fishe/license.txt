@@ -1,0 +1,11 @@
+Model Information:
+* title:	Fishe
+* source:	https://sketchfab.com/3d-models/fishe-4051823a2c6044d0bab48ef7fa806b69
+* author:	bukharig0300 (https://sketchfab.com/bukharig0300)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Fishe" (https://sketchfab.com/3d-models/fishe-4051823a2c6044d0bab48ef7fa806b69) by bukharig0300 (https://sketchfab.com/bukharig0300) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
