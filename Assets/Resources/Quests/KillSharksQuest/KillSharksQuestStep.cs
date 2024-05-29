@@ -6,7 +6,23 @@ public class KillSharksQuestStep : QuestStep
 {
     private int sharksKilled = 0;
     private int sharksToComplete = 2;
+    private void OnEnable()
+    {
+        GameEventsManager.instance.miscEvents.onSharkKilled += SharksKilled;
+    }
 
+    private void OnDisable()
+    {
+        if (GameEventsManager.instance != null)
+        {
+            GameEventsManager.instance.miscEvents.onSharkKilled -= SharksKilled;
+        }
+        else
+        {
+            return;
+        }
+
+    }
 
     private void SharksKilled()
     {

@@ -6,7 +6,23 @@ public class CollectKoiFishQuestStep : QuestStep
 {
     private int koiFishCollected = 0;
     private int koiFishToComplete = 2;
+    private void OnEnable()
+    {
+        GameEventsManager.instance.miscEvents.onKoiFishesCollected += KoiFishesCollected;
+    }
 
+    private void OnDisable()
+    {
+        if (GameEventsManager.instance != null)
+        {
+            GameEventsManager.instance.miscEvents.onKoiFishesCollected -= KoiFishesCollected;
+        }
+        else
+        {
+            return;
+        }
+
+    }
     private void KoiFishesCollected()
     {
         if (koiFishCollected < koiFishToComplete)

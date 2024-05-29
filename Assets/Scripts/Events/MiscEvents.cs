@@ -5,6 +5,24 @@ using System;
 
 public class MiscEvents : MonoBehaviour
 {
+    public event Action onKoiFishesCollected;
+    public void KoiFishCollected()
+    {
+        if (onKoiFishesCollected != null)
+        {
+            onKoiFishesCollected();
+        }
+    }
+
+    public event Action onSharkKilled;
+    public void SharkKilled()
+    {
+        if (onSharkKilled != null)
+        {
+            onSharkKilled();
+        }
+    }
+
     public event Action onCoinCollected;
     public void CoinCollected()
     {

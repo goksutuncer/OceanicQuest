@@ -6,6 +6,8 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 public class FishMovement : MonoBehaviour
 {
     [SerializeField] private SkinnedMeshRenderer[] _skinnedMeshRenderer = null;
+    [SerializeField] private bool _isKoi = false;
+
     private CharacterController _cc;
     public float moveSpeed = 5f; // Speed of movement
     public float rotationSpeed = 5f; // Speed of rotation
@@ -135,6 +137,10 @@ public class FishMovement : MonoBehaviour
                 item.SetPropertyBlock(materialPropertyBlock);
             }
             yield return null;
+        }
+        if (_isKoi)
+        {
+            GameEventsManager.instance.miscEvents.KoiFishCollected();
         }
         gameObject.SetActive(false);
         DropItem();

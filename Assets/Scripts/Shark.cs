@@ -168,6 +168,7 @@ public class Shark : MonoBehaviour
             }
             yield return null;
         }
+        GameEventsManager.instance.miscEvents.SharkKilled();
         Destroy(gameObject);
         DropItem();
     }

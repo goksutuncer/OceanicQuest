@@ -312,6 +312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skinnedMeshRenderer: []
+  _isKoi: 1
   moveSpeed: 5
   rotationSpeed: 5
   changeDirectionInterval: 5
