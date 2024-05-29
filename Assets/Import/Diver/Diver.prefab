@@ -1523,6 +1523,7 @@ MonoBehaviour:
   - {fileID: 2951696915058524017}
   - {fileID: 8487013844369624156}
   - {fileID: 2915206018603873806}
+  _gettingHitSound: {fileID: 8300000, guid: 2cd9ae6db76e14778ae648d45fb1cc00, type: 3}
 --- !u!1 &2066820870365011467
 GameObject:
   m_ObjectHideFlags: 0
@@ -2529,6 +2530,8 @@ GameObject:
   - component: {fileID: 308788275}
   - component: {fileID: 6582678198382671369}
   - component: {fileID: 977905135630024984}
+  - component: {fileID: 308788284}
+  - component: {fileID: 308788276}
   m_Layer: 4
   m_Name: Diver
   m_TagString: Player
@@ -2613,9 +2616,8 @@ MonoBehaviour:
   _weapon: {fileID: 589831483377490702, guid: c6b2b67e9001c4db8b5bd5fd42db34ea, type: 3}
   isInvincible: 0
   _shieldVisualizer: {fileID: 234721008883788672}
+  _WeaponSoundClip: {fileID: 8300000, guid: 05032342bea8847f7a7b8a77fa22eb09, type: 3}
   _isShieldActive: 0
-  ItemToDrop: {fileID: 0}
-  Coin: 0
 --- !u!114 &691902089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2658,7 +2660,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.52, z: 1.24}
+  m_Size: {x: 3.29, y: 0.86, z: 2.08}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &977905135630024984
 Rigidbody:
@@ -2676,6 +2678,116 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!82 &308788284
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3714465974344504572}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &308788276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3714465974344504572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b837621f61e844f39ba173432ed5482c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingLevel: 1
+  startingExperience: 0
 --- !u!1 &3717300980568594694
 GameObject:
   m_ObjectHideFlags: 0
@@ -4468,6 +4580,7 @@ MonoBehaviour:
   - {fileID: 2951696915058524017}
   - {fileID: 8487013844369624156}
   - {fileID: 2915206018603873806}
+  _deadSound: {fileID: 8300000, guid: 4ec8632cf1a794c2687c5abb305ffb18, type: 3}
 --- !u!1 &6106641921637943152
 GameObject:
   m_ObjectHideFlags: 0

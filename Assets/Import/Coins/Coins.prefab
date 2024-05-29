@@ -249,9 +249,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   respawnTimeSeconds: 8
   goldGained: 1
-  sphereCollider: {fileID: 3013774956364415334}
   visual: {fileID: 8696214948815132550}
   bubble: {fileID: 8312941048380958481}
+  _speed: 2
+  _coinSound: {fileID: 8300000, guid: c15a463755abe4c2e9e644edb2b8a360, type: 3}
 --- !u!135 &3013774956364415334
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -263,8 +264,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: -0.06, y: 0.45, z: 0}
+  m_Radius: 0.71
+  m_Center: {x: -0.08, y: 0.45, z: 0}
 --- !u!1 &4894552281806648258
 GameObject:
   m_ObjectHideFlags: 0

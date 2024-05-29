@@ -8,7 +8,8 @@ public class PlayerBeingHitState : StateBase
     [SerializeField] private SkinnedMeshRenderer[] _skinnedMeshRenderer = null;
 
     private MaterialPropertyBlock _materialPropertyBlock = null;
-    
+    [SerializeField] private AudioClip _gettingHitSound;
+
     public override void EnterActions()
     {
         if (_player.Health != null)
@@ -45,7 +46,7 @@ public class PlayerBeingHitState : StateBase
             materialPropertyBlock.SetFloat("_blink", 0.4f);
             item.SetPropertyBlock(materialPropertyBlock);
         }
-
+        AudioSource.PlayClipAtPoint(_gettingHitSound, transform.position);
         yield return new WaitForSeconds(0.2f);
 
         foreach (var item in _skinnedMeshRenderer)

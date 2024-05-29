@@ -22,6 +22,8 @@ public class MantaBehaviour : MonoBehaviour
     public GameObject ItemToDrop;
     public int Coin;
 
+    [SerializeField] private AudioClip _questStartSound;
+
     void Awake()
     {
         _cc = GetComponent<CharacterController>();
@@ -41,6 +43,7 @@ public class MantaBehaviour : MonoBehaviour
         if (other.tag == "Player")
         {
             StartCoroutine(MaterialDissolve());
+            AudioSource.PlayClipAtPoint(_questStartSound, transform.position);
             SphereCollider sphereCollider = GetComponent<SphereCollider>();
             sphereCollider.enabled = false;
 

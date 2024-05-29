@@ -8,7 +8,8 @@ public class PowerUpBehaviour : MonoBehaviour
     private float _speed = 2.0f;
     [SerializeField] // 0 = Health, 1 = Speed, 2 = Shield, 3 = Double Dmg
     private int powerUpID;
-
+    [SerializeField]
+    private AudioClip _powerupSound;
 
 
     // Update is called once per frame
@@ -24,6 +25,7 @@ public class PowerUpBehaviour : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            AudioSource.PlayClipAtPoint(_powerupSound, transform.position);
             DiverPlayer player = other.transform.GetComponent<DiverPlayer>();
             if (player != null) 
             {
@@ -34,7 +36,6 @@ public class PowerUpBehaviour : MonoBehaviour
                         break;
                     case 1:
                         player.PlayerSwimState.SpeedBoostActive();
-                        Debug.Log("Faster");
                         break;
                     case 2:
                         player.ShieldActive();

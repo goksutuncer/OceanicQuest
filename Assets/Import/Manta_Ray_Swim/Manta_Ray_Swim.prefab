@@ -149,6 +149,7 @@ MonoBehaviour:
   exclamation: {fileID: 4601833976786705059, guid: 469a973ef07d7448ca5082d6fac231d2, type: 3}
   ItemToDrop: {fileID: 4877689038343613885, guid: 7ba5743310215409986d1b15d201f43b, type: 3}
   Coin: 0
+  _questStartSound: {fileID: 8300000, guid: 18f6c8f51d92d43e1acc89f0415c5f39, type: 3}
 --- !u!1 &1897139165442255318
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,11 +8,10 @@ public class Coin : MonoBehaviour
     [Header("Config")]
     [SerializeField] private float respawnTimeSeconds = 1;
     [SerializeField] private int goldGained = 1;
-    [SerializeField] private SphereCollider sphereCollider;
     [SerializeField] private GameObject visual;
     [SerializeField] private GameObject bubble;
-    [SerializeField]
-    private float _speed = 2.0f;
+    [SerializeField] private float _speed = 2.0f;
+    [SerializeField] private AudioClip _coinSound;
 
     void Update()
     {
@@ -34,7 +33,6 @@ public class Coin : MonoBehaviour
     private IEnumerator RespawnAfterTime()
     {
         yield return new WaitForSeconds(respawnTimeSeconds);
-       //Instantiate();
     }
 
 
@@ -42,7 +40,7 @@ public class Coin : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Coin");
+            AudioSource.PlayClipAtPoint(_coinSound, transform.position);
             CollectCoin();
         }
     }

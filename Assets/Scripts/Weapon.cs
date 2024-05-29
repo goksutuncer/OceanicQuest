@@ -43,7 +43,6 @@ public class Weapon : MonoBehaviour
             if (shark != null)
             {
                 shark.ApplyDamage(_player.Damage());
-                Debug.Log(_player.Damage());
             }
             Destroy(gameObject);
         }

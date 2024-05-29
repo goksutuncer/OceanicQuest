@@ -7,6 +7,7 @@ using UnityEngine.TextCore.Text;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private AudioClip _gameOverSound;
     public GameUIManager gameUI_Manager;
     private bool gameIsOver;
     private static GameManager instance;
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
     {
         gameIsOver = true;
         gameUI_Manager.ShowGameOverUI();
+        AudioSource.PlayClipAtPoint(_gameOverSound, transform.position);
         OnGameOver?.Invoke();
     }
 

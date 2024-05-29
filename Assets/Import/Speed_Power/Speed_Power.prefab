@@ -260,7 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3
   powerUpID: 1
-  _player: {fileID: 0}
+  _powerupSound: {fileID: 8300000, guid: 9a394cacefc994737a576cb1bdf25a5e, type: 3}
 --- !u!135 &4631852446449223978
 SphereCollider:
   m_ObjectHideFlags: 0

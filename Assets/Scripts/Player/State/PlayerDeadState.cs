@@ -6,6 +6,7 @@ public class PlayerDeadState : StateBase
 {
     [SerializeField] private DiverPlayer _player = null;
     [SerializeField] private SkinnedMeshRenderer[] _skinnedMeshRenderer = null;
+    [SerializeField] private AudioClip _deadSound;
 
     public override void EnterActions()
     {
@@ -24,7 +25,7 @@ public class PlayerDeadState : StateBase
         float dissolveHeight_start = 20f;
         float dissolveHeight_target = -10f;
         float dissolveHeight;
-
+        AudioSource.PlayClipAtPoint(_deadSound, transform.position);
         foreach (var item in _skinnedMeshRenderer)
         {
             MaterialPropertyBlock materialPropertyBlock = new MaterialPropertyBlock();
