@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: CollectKoiFishQuest
   m_EditorClassIdentifier: 
   <id>k__BackingField: CollectKoiFishQuest
-  displayName: 
-  levelRequirement: 0
+  displayName: Collect the Koi Fish!
+  levelRequirement: 1
   questPrerequisites: []
   questStepPrefabs:
   - {fileID: 2269622327209751213, guid: 406ef5d36c3774061a341a2c855c529d, type: 3}

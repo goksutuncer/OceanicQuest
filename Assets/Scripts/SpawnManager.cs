@@ -15,6 +15,9 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private DiverPlayer _player;
     [SerializeField] private GameObject _coinPrefab;
 
+    [SerializeField] private FishPoolManager _fishPoolManager;
+    [SerializeField] private GameObject[] _fishPrefabs;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +40,7 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SpawnPowerupRoutine());
         StartCoroutine(SpawnEnemyRoutine());
         StartCoroutine(SpawnCoinRoutine());
+        StartCoroutine(SpawnFishRoutine());
     }
 
     IEnumerator SpawnCoinRoutine()
@@ -82,5 +86,22 @@ public class SpawnManager : MonoBehaviour
 
     }
 
+    IEnumerator SpawnFishRoutine()
+    {
+        while (_stopSpawning == false)
+        {
+            float rand = Random.Range(0f, 1f);
+            float randomY = Random.Range(-4f, 5f);
+            float randomX = rand < 0.5f ? -17f : 14f;
+            Vector3 posToFishSpawn = new Vector3(randomX, randomY, transform.position.z);
+
+            GameObject fishPrefab = _fishPrefabs[Random.Range(0, _fishPrefabs.Length)];
+            GameObject spawnedFish = _fishPoolManager.GetFishFromPool(fishPrefab);
+            spawnedFish.transform.position = posToFishSpawn;
+            spawnedFish.SetActive(true);
+
+            yield return new WaitForSeconds(Random.Range(3, 8));
+        }
+    }
 
 }

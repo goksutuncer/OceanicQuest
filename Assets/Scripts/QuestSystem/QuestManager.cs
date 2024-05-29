@@ -11,6 +11,22 @@ public class QuestManager : MonoBehaviour
 
     public Quest ActiveQuest;
 
+    [SerializeField] private QuestGiver _questGiver;
+
+    private static QuestManager _instance;
+    public static QuestManager instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<QuestManager>();
+            }
+
+            return _instance;
+        }
+    }
+
     // quest start requirements
     private int currentPlayerLevel;
 
@@ -129,6 +145,7 @@ public class QuestManager : MonoBehaviour
         else
         {
             ChangeQuestState(quest.info.id, QuestState.FINISHED);
+            FinishQuest(quest.info.id);
         }
     }
 
@@ -136,7 +153,8 @@ public class QuestManager : MonoBehaviour
     {
         Quest quest = GetQuestById(id);
         ClaimRewards(quest);
-        ChangeQuestState(quest.info.id, QuestState.FINISHED);
+        //ChangeQuestState(quest.info.id, QuestState.FINISHED);
+        _questGiver.SpawningQuest();
     }
 
     private void ClaimRewards(Quest quest)
@@ -169,7 +187,7 @@ public class QuestManager : MonoBehaviour
         return idToQuestMap;
     }
 
-    private Quest GetQuestById(string id)
+    public Quest GetQuestById(string id)
     {
         Quest quest = questMap[id];
         if (quest == null)
@@ -181,28 +199,28 @@ public class QuestManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        foreach (Quest quest in questMap.Values)
-        {
-            SaveQuest(quest);
-        }
+        //foreach (Quest quest in questMap.Values)
+        //{
+        //    SaveQuest(quest);
+        //}
     }
 
     private void SaveQuest(Quest quest)
     {
-        try
-        {
-            QuestData questData = quest.GetQuestData();
-            // serialize using JsonUtility, but use whatever you want here (like JSON.NET)
-            string serializedData = JsonUtility.ToJson(questData);
-            // saving to PlayerPrefs is just a quick example for this tutorial video,
-            // you probably don't want to save this info there long-term.
-            // instead, use an actual Save & Load system and write to a file, the cloud, etc..
-            PlayerPrefs.SetString(quest.info.id, serializedData);
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Failed to save quest with id " + quest.info.id + ": " + e);
-        }
+        //try
+        //{
+        //    QuestData questData = quest.GetQuestData();
+        //    // serialize using JsonUtility, but use whatever you want here (like JSON.NET)
+        //    string serializedData = JsonUtility.ToJson(questData);
+        //    // saving to PlayerPrefs is just a quick example for this tutorial video,
+        //    // you probably don't want to save this info there long-term.
+        //    // instead, use an actual Save & Load system and write to a file, the cloud, etc..
+        //    PlayerPrefs.SetString(quest.info.id, serializedData);
+        //}
+        //catch (System.Exception e)
+        //{
+        //    Debug.LogError("Failed to save quest with id " + quest.info.id + ": " + e);
+        //}
     }
 
     private Quest LoadQuest(QuestInfoSO questInfo)

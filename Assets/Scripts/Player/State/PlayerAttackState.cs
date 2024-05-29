@@ -11,6 +11,7 @@ public class PlayerAttackState : StateBase
     private bool isFired;
     private bool isInState;
 
+
     public override void EnterActions()
     {
         isInState = true;
@@ -39,7 +40,7 @@ public class PlayerAttackState : StateBase
             {
                 _weaponInstance.GetComponent<Weapon>().Fire();
                 isFired = true;
-
+                _player.PlayWeaponSound();
                 _player.PlayerStateController.ChangeState(EDiverPlayerState.Swim);
 
                 yield break;

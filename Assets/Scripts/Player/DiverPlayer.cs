@@ -23,6 +23,7 @@ public class DiverPlayer : MonoBehaviour
     [SerializeField] private Weapon _weapon;
     public Weapon Weapon => _weapon;
 
+
     public bool isInvincible;
     public GameObject _shieldVisualizer;
 
@@ -31,13 +32,24 @@ public class DiverPlayer : MonoBehaviour
     private int _damage = 50;
     private int _multidamage = 100;
 
+    [SerializeField]
+    private AudioClip _WeaponSoundClip;
+    private AudioSource _audioSource;
 
     public bool _isShieldActive = false;
 
     void Awake()
     {
         _health = GetComponent<Health>();
-
+        _audioSource = GetComponent<AudioSource>();
+        if (_audioSource == null)
+        {
+            Debug.LogError("AudioSource on the player is NULL");
+        }
+        else
+        {
+            _audioSource.clip = _WeaponSoundClip;
+        }
     }
     
     void FixedUpdate()
@@ -52,6 +64,12 @@ public class DiverPlayer : MonoBehaviour
         }
         _playerInput.ClearCache();
     }
+
+    public void PlayWeaponSound()
+    {
+        _audioSource.Play();
+    }
+
     public int Damage()
     {
         if (_isDamageBoostActive == true)

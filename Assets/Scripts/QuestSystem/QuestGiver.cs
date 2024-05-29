@@ -11,14 +11,16 @@ public class QuestGiver : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpawningQuest();
+
         GameManager.Instance.OnGameOver += OnGameOver;
     }
 
     private void OnDestroy()
     {
         if (GameManager.Instance)
+        {
             GameManager.Instance.OnGameOver -= OnGameOver;
+        }
     }
 
     private void OnGameOver()
@@ -30,9 +32,13 @@ public class QuestGiver : MonoBehaviour
     {
         if (_stopSpawning == false)
         {
-            Vector3 posofAnimal = new Vector3(Random.Range(-10f, 10f), -6, 0);
+            float rand = Random.Range(0f, 1f);
+            float randomY = Random.Range(-4f, 5f);
+            float randomX = rand < 0.5f ? -17f : 14f;
+            Vector3 posToMantaSpawn = new Vector3(randomX, randomY, transform.position.z);
             GameObject _questGiverAnimalsPrefab = _questGiverAnimals[Random.Range(0, _questGiverAnimals.Length)];
-            GameObject newquestGiverAnimals = Instantiate(_questGiverAnimalsPrefab, posofAnimal, Quaternion.identity);
+            GameObject newquestGiverAnimals = Instantiate(_questGiverAnimalsPrefab, posToMantaSpawn, Quaternion.identity);
+
         }
     }
 }

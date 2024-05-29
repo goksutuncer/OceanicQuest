@@ -44,7 +44,7 @@ public class MantaBehaviour : MonoBehaviour
             SphereCollider sphereCollider = GetComponent<SphereCollider>();
             sphereCollider.enabled = false;
 
-            exclamation.SetActive(false);
+            Destroy(exclamation);
         }
     }
 

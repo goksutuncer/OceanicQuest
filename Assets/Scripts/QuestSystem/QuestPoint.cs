@@ -7,7 +7,6 @@ public class QuestPoint : MonoBehaviour
     [Header("Quest")]
     [SerializeField] private QuestInfoSO questInfoForPoint;
 
-
     private string questId;
     private QuestState currentQuestState;
 
@@ -40,6 +39,8 @@ public class QuestPoint : MonoBehaviour
     {
         if (otherCollider.CompareTag("Player"))
         {
+            currentQuestState = QuestManager.instance.GetQuestById(questId).state;
+
             // start or finish a quest
             if (currentQuestState.Equals(QuestState.CAN_START))
             {

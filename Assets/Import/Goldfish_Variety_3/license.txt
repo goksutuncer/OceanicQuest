@@ -1,0 +1,11 @@
+Model Information:
+* title:	Goldfish_Variety 3
+* source:	https://sketchfab.com/3d-models/goldfish-variety-3-851c92634c014949ae78c4b52807584f
+* author:	Picasty (https://sketchfab.com/picasty)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Goldfish_Variety 3" (https://sketchfab.com/3d-models/goldfish-variety-3-851c92634c014949ae78c4b52807584f) by Picasty (https://sketchfab.com/picasty) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
