@@ -49,6 +49,7 @@ public class Shark : MonoBehaviour
             StartCoroutine(MaterialDissolve());
             BoxCollider boxCollider = GetComponent<BoxCollider>();
             boxCollider.enabled = false;
+            _cc.enabled = false;
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -167,6 +168,7 @@ public class Shark : MonoBehaviour
             }
             yield return null;
         }
+
         GameEventsManager.instance.miscEvents.SharkKilled();
         Destroy(gameObject);
         DropItem();
