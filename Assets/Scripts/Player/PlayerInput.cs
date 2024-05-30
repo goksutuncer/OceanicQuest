@@ -12,15 +12,35 @@ public class PlayerInput : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (!MouseButtonDown && Time.timeScale != 0)
         {
             MouseButtonDown = Input.GetMouseButtonDown(0);
         }
         MouseButtonUp = Input.GetMouseButtonUp(0);
-        HorizontalInput = Input.GetAxisRaw("Horizontal");
-        VerticalInput = Input.GetAxisRaw("Vertical");
+        bool w = Input.GetKey(KeyCode.W);
+        bool a = Input.GetKey(KeyCode.A);
+        bool s = Input.GetKey(KeyCode.S);
+        bool d = Input.GetKey(KeyCode.D);
+        HorizontalInput = 0;
+        VerticalInput = 0;
+        if (w)
+        {
+            VerticalInput = 1;
+        }
+        if (a)
+        {
+            HorizontalInput = -1;
+        }
+        if (s)
+        {
+            VerticalInput = -1;
+        }
+        if (d)
+        {
+            HorizontalInput = 1;
+        }
         if (!SpaceKeyDown && Time.timeScale != 0)
         {
             SpaceKeyDown = Input.GetKeyDown(KeyCode.Space);
