@@ -10,15 +10,24 @@ public class PlayerInput : MonoBehaviour
     public bool MouseButtonUp;
     public bool SpaceKeyDown;
 
-
-    // Update is called once per frame
-    void FixedUpdate()
+    private void Update()
     {
         if (!MouseButtonDown && Time.timeScale != 0)
         {
             MouseButtonDown = Input.GetMouseButtonDown(0);
         }
         MouseButtonUp = Input.GetMouseButtonUp(0);
+
+        if (!SpaceKeyDown && Time.timeScale != 0)
+        {
+            SpaceKeyDown = Input.GetKeyDown(KeyCode.Space);
+        }
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+
         bool w = Input.GetKey(KeyCode.W);
         bool a = Input.GetKey(KeyCode.A);
         bool s = Input.GetKey(KeyCode.S);
@@ -41,10 +50,7 @@ public class PlayerInput : MonoBehaviour
         {
             HorizontalInput = 1;
         }
-        if (!SpaceKeyDown && Time.timeScale != 0)
-        {
-            SpaceKeyDown = Input.GetKeyDown(KeyCode.Space);
-        }
+
     }
 
     public void ClearCache()
